@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/cart_empty.dart';
-import 'package:grocery_app/screens/cart_full.dart';
+import 'package:grocery_app/widgets/cart_empty.dart';
+import 'package:grocery_app/widgets/cart_full.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
