@@ -14,7 +14,7 @@ class BottomBarScreen extends StatefulWidget {
 class _BottomBarScreenState extends State<BottomBarScreen> {
 
   List<Map<String, Object>> _pages;
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -28,12 +28,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         'title': 'Feeds Screen',
       },
       {
-        'page': CartScreen(),
-        'title': 'Card Screen',
-      },
-      {
         'page': SearchScreen(),
         'title': 'Search Screen',
+      },
+      {
+        'page': CartScreen(),
+        'title': 'Cart Screen',
       },
       {
         'page': UserScreen(),
@@ -82,14 +82,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(null),
-                  tooltip: 'Search',
-                  label: 'Search',
                   activeIcon: null,
+                  label: 'Search',
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.shopping_cart),
                     tooltip: 'Cart',
-                    label: 'Cart'),
+                    label: 'Cart',
+                ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
                   tooltip: 'User',
@@ -100,16 +100,19 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.indigo,
-        tooltip: 'Search',
-        elevation: 5,
-        child: (Icon(Icons.search)),
-        onPressed: () {
-          setState(() {
-            _selectedIndex = 2;
-          });
-        },
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FloatingActionButton(
+          backgroundColor: Colors.indigo,
+          tooltip: 'Search',
+          elevation: 5,
+          child: (Icon(Icons.search)),
+          onPressed: () {
+            setState(() {
+              _selectedIndex = 0;
+            });
+          },
+        ),
       ),
     );
   }
