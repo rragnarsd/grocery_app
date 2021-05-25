@@ -104,12 +104,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
           backgroundColor: Colors.indigo,
+          hoverElevation: 10,
           tooltip: 'Search',
           elevation: 5,
           child: (Icon(Icons.search)),
           onPressed: () {
             setState(() {
-              _selectedIndex = 0;
+              _selectedIndex = 2;
             });
           },
         ),
