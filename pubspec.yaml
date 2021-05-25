@@ -30,6 +30,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   list_tile_switch: ^1.0.0
   flutter_staggered_grid_view: ^0.4.0
+  badges: ^2.0.1
+  backdrop: ^0.6.1
+  carousel_pro: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +53,15 @@ flutter:
   assets:
     - assets/images/cart.jpg
     - assets/images/carts.jpg
+    - assets/images/charles-gao.jpg
+    - assets/images/gemma.jpg
+    - assets/images/mehrad-vosoughi.jpg
+    - assets/images/maksim-shutov.jpg
+    - assets/images/brett-jordan.jpg
+    - assets/images/nur-afni-setiyaningru.jpg
+    - assets/images/julia-zolotova-M.jpg
+    - assets/images/randy-fath.jpg
+    - assets/images/sangga-rima.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

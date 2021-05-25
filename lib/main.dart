@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/home.dart';
-
 import 'screens/bottom_bar.dart';
 
 void main() {

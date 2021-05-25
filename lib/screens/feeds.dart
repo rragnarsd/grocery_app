@@ -7,7 +7,7 @@ class FeedsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.black,
       body: StaggeredGridView.countBuilder(
         crossAxisCount: 6,
         itemCount: 8,
@@ -16,16 +16,7 @@ class FeedsScreen extends StatelessWidget {
         new StaggeredTile.count(3, index.isEven ? 4 : 5),
         mainAxisSpacing: 6.0,
         crossAxisSpacing: 6.0,
-      )/*GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 240/300,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      children: List.generate(
-        30,
-        (index) => FeedsProducts(),
-      ),
-    ),*/
+      )
     );
   }
 }
