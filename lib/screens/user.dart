@@ -10,44 +10,170 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   bool _value = false;
+  ScrollController _scrollController;
+  var top = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('User Info'),
-            Divider(
-              thickness: 1,
-              color: Colors.grey,
-            ),
-            UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 0),
-            UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 1),
-            UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
-            /* userListTile('Email', 'Email sub', 0, context),
-        userListTile('Phone', '444444', 0, context),
-        userListTile('Address', 'Karanes', 0, context),
-        userListTile('Joined Date', 'date', 0, context),*/
-            Divider(
-              thickness: 1,
-              color: Colors.grey,
-            ),
-            ListTileSwitch(
-              value: _value,
-              leading: Icon(Icons.night_shelter),
-              onChanged: (value) {
-                setState(() {
-                  _value = value;
-                });
+      body: Stack(children: [
+        CustomScrollView(controller: _scrollController, slivers: [
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            elevation: 4,
+            expandedHeight: 200,
+            pinned: true,
+            flexibleSpace: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                top = constraints.biggest.height;
+                return Container(
+                  child: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    centerTitle: true,
+                    title: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      /* mainAxisAlignment: MainAxisAlignment.spaceAround,*/
+                      children: [
+                        AnimatedOpacity(
+                          opacity: top <= 110.0 ? 1.0 : 0,
+                          duration: Duration(milliseconds: 300),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Container(
+                                //ATH
+                                height: 1.8,
+                                width: 1.8,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.white,
+                                      blurRadius: 1.0,
+                                    )
+                                  ],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      'https://cdn.pixabay.com/photo/2019/09/03/15/18/woman-4449637_960_720.png',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                'Guest',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    background: Image(
+                      image: NetworkImage(
+                        'https://lh3.googleusercontent.com/proxy/v3U09WnyElFrpxbwEsNKX804OxnsDp1hu_G9DNBnsFE8oYVLGXHe9t4TMcX2e12ouj7UgbszJ3hgRA-LoZGuYKghdubJ3X8dsuQe',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
               },
-              visualDensity: VisualDensity.comfortable,
-              switchType: SwitchType.cupertino,
-              switchActiveColor: Colors.indigo,
-              title: Text('Dark Theme'),
             ),
-            UserListTile(title: 'Logout', subTitle: '', index: 4),
-          ]),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('User Info'),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 0),
+                  UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 1),
+                  UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
+                  UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
+                  UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
+                  /* userListTile('Email', 'Email sub', 0, context),
+                userListTile('Phone', '444444', 0, context),
+                userListTile('Address', 'Karanes', 0, context),
+                userListTile('Joined Date', 'date', 0, context),*/
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTileSwitch(
+                    value: _value,
+                    leading: Icon(Icons.night_shelter),
+                    onChanged: (value) {
+                      setState(() {
+                        _value = value;
+                      });
+                    },
+                    visualDensity: VisualDensity.comfortable,
+                    switchType: SwitchType.cupertino,
+                    switchActiveColor: Colors.indigo,
+                    title: Text('Dark Theme'),
+                  ),
+                  UserListTile(title: 'Logout', subTitle: '', index: 4),
+                ]),
+          ),
+        ]),
+        _buildFab(),
+      ]),
+    );
+  }
+
+  Widget _buildFab() {
+    //starting fab position
+    final double defaultTopMargin = 200.0 - 4.0;
+    //pixels from top where scaling should start
+    final double scaleStart = 160.0;
+    //pixels from top where scaling should end
+    final double scaleEnd = scaleStart / 2;
+
+    double top = defaultTopMargin;
+    double scale = 1.0;
+    if (_scrollController.hasClients) {
+      double offset = _scrollController.offset;
+      top -= offset;
+      if (offset < defaultTopMargin - scaleStart) {
+        //offset small => don't scale down
+        scale = 1.0;
+      } else if (offset < defaultTopMargin - scaleEnd) {
+        //offset between scaleStart and scaleEnd => scale down
+        scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
+      } else {
+        //offset passed scaleEnd => hide fab
+        scale = 0.0;
+      }
+    }
+    return Positioned(
+      top: top,
+      right: 16.0,
+      child: Transform(
+        transform: Matrix4.identity()..scale(scale),
+        alignment: Alignment.center,
+        child: FloatingActionButton(
+          heroTag: "btn1",
+          onPressed: () {},
+          child: Icon(Icons.camera_alt_outlined),
+        ),
+      ),
     );
   }
 }
