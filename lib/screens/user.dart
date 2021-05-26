@@ -103,6 +103,41 @@ class _UserScreenState extends State<UserScreen> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
+                        'User Bag',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    Material(
+                      child: InkWell(
+                        splashColor: Theme.of(context).splashColor,
+                        child: ListTile(
+                          title: Text('Wishlist'),
+                          trailing: Icon(Icons.chevron_right),
+                          leading: Icon(Icons.favorite),
+                          onTap: () => Navigator.of(context)
+                              .pushNamed('/WishListScreen'),
+                        ),
+                      ),
+                    ),
+                    Material(
+                      child: InkWell(
+                        splashColor: Theme.of(context).splashColor,
+                        child: ListTile(
+                          title: Text('Cart'),
+                          trailing: Icon(Icons.chevron_right),
+                          leading: Icon(Icons.shopping_cart),
+                          onTap: () {},
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
                         'Information',
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500),

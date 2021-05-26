@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/cart.dart';
+import 'package:grocery_app/screens/wishlist.dart';
+import 'package:grocery_app/widgets/product_details.dart';
 import 'screens/bottom_bar.dart';
 
 void main() {
@@ -16,7 +19,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity
       ),
-      home: BottomBarScreen(),
+      initialRoute: '/BottomBarScreen',
+      routes: {
+        '/BottomBarScreen': (context) => BottomBarScreen(),
+        '/CartScreen': (context) => CartScreen(),
+        '/WishListScreen': (context) => WishListScreen(),
+        '/ProductDetails': (context) => ProductDetails(),
+      },
     );
   }
 }

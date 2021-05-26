@@ -15,20 +15,20 @@ class CartScreen extends StatelessWidget {
               actions: [IconButton(icon: Icon(Icons.delete), onPressed: () {})],
             ),
             body: Column(
-                /*mainAxisAlignment: MainAxisAlignment.spaceBetween,*/
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: ListView.builder(
-                        itemCount: 4,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CartFull();
-                        },
-                      ),
+              /*mainAxisAlignment: MainAxisAlignment.spaceBetween,*/
+              children: [
+                Expanded(
+                  child: Container(
+                    child: ListView.builder(
+                      itemCount: 4,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CartFull();
+                      },
                     ),
                   ),
-                  Checkout()
-                ],
+                ),
+                Checkout()
+              ],
             ),
           );
   }
@@ -49,9 +49,9 @@ class Checkout extends StatelessWidget {
                   Text(
                     'Total:',
                     style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.indigo,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.indigo,
                     ),
                   ),
                   SizedBox(
@@ -66,13 +66,15 @@ class Checkout extends StatelessWidget {
               ),
             ),
             Container(
-                width: MediaQuery.of(context).size.width * 0.37,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Check Out',
-                      style: TextStyle(fontSize: 16.0),
-                    ))),
+              width: MediaQuery.of(context).size.width * 0.37,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  'Check Out',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ),
           ],
         ),
       ),
