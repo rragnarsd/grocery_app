@@ -2,6 +2,21 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 class FeedsProducts extends StatefulWidget {
+  final String id;
+  final String name;
+  final String imgUrl;
+  final double price;
+  final int qty;
+  final bool isFav;
+
+  FeedsProducts(
+      {this.id,
+      this.name,
+      this.imgUrl,
+      this.price,
+      this.qty,
+      this.isFav});
+
   @override
   _FeedsProductsState createState() => _FeedsProductsState();
 }
@@ -12,14 +27,13 @@ class _FeedsProductsState extends State<FeedsProducts> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => Navigator.of(context)
-            .pushNamed('/ProductDetails'),
+        onTap: () => Navigator.of(context).pushNamed('/ProductDetails'),
         child: Container(
           width: 250.0,
           height: 290.0,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              color: Colors.grey.shade200,
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            color: Colors.grey.shade200,
           ),
           child: Column(
             children: [
@@ -34,7 +48,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       maxHeight: MediaQuery.of(context).size.height * 0.17,
                     ),
                     child: Image.network(
-                      'https://images.unsplash.com/photo-1509440159596-0249088772ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80',
+                      widget.imgUrl,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -56,19 +70,18 @@ class _FeedsProductsState extends State<FeedsProducts> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Description',
+                      widget.name,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
                     Text(
-                      '\$15.0',
+                      '\$ ${widget.price.toString()}',
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 16.0, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -77,7 +90,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Quantity: 2',
+                          'Quantity: ${widget.qty}',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.grey.shade400),
