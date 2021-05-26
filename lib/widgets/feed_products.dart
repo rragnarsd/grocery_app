@@ -1,21 +1,9 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/models/product.dart';
+import 'package:provider/provider.dart';
 
 class FeedsProducts extends StatefulWidget {
-  final String id;
-  final String name;
-  final String imgUrl;
-  final double price;
-  final int qty;
-  final bool isFav;
-
-  FeedsProducts(
-      {this.id,
-      this.name,
-      this.imgUrl,
-      this.price,
-      this.qty,
-      this.isFav});
 
   @override
   _FeedsProductsState createState() => _FeedsProductsState();
@@ -24,6 +12,7 @@ class FeedsProducts extends StatefulWidget {
 class _FeedsProductsState extends State<FeedsProducts> {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<Product>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -48,7 +37,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       maxHeight: MediaQuery.of(context).size.height * 0.17,
                     ),
                     child: Image.network(
-                      widget.imgUrl,
+                      productProvider.imgUrl,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -70,7 +59,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.name,
+                      productProvider.name,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
@@ -78,7 +67,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       height: 10.0,
                     ),
                     Text(
-                      '\$ ${widget.price.toString()}',
+                      '\$ ${productProvider.price.toString()}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.w700),
@@ -90,7 +79,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Quantity: ${widget.qty}',
+                          'Quantity: ${productProvider.qty}',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.grey.shade400),

@@ -32,6 +32,7 @@ dependencies:
   badges: ^2.0.1
   backdrop: ^0.6.1
   carousel_pro: ^1.0.0
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -50,17 +51,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/cart.jpg
-    - assets/images/carts.jpg
-    - assets/images/charles-gao.jpg
-    - assets/images/gemma.jpg
-    - assets/images/mehrad-vosoughi.jpg
-    - assets/images/maksim-shutov.jpg
-    - assets/images/brett-jordan.jpg
-    - assets/images/nur-afni-setiyaningru.jpg
-    - assets/images/julia-zolotova-M.jpg
-    - assets/images/randy-fath.jpg
-    - assets/images/sangga-rima.jpg
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
