@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/models/product.dart';
+import 'package:grocery_app/widgets/product_details.dart';
+import 'package:provider/provider.dart';
 
 class PopularProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<Product>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -20,7 +24,9 @@ class PopularProducts extends StatelessWidget {
               bottomLeft: Radius.circular(10.0),
               bottomRight: Radius.circular(10.0),
             ),
-            onTap: () {},
+           onTap: () => Navigator.pushNamed(context, ProductDetails.routeName, arguments: productProvider.id),
+           /* onTap: () => Navigator.of(context)
+                .pushNamed('/ProductDetails'),*/
             child: Column(
               children: [
                 Stack(
@@ -30,7 +36,8 @@ class PopularProducts extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(
-                              'https://images.unsplash.com/photo-1509440159596-0249088772ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80'),
+                            productProvider.imgUrl,
+                          ),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -58,7 +65,7 @@ class PopularProducts extends StatelessWidget {
                         padding: EdgeInsets.all(10.0),
                         color: Colors.grey.shade200,
                         child: Text(
-                          '\$29',
+                          '\$ ${productProvider.price}',
                           style: TextStyle(color: Colors.grey.shade800),
                         ),
                       ),
@@ -71,7 +78,7 @@ class PopularProducts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Title',
+                        productProvider.name,
                         maxLines: 1,
                         style: TextStyle(
                           fontSize: 18.0,
@@ -82,7 +89,7 @@ class PopularProducts extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Description',
+                            productProvider.description,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -97,7 +104,11 @@ class PopularProducts extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.shopping_bag, size: 25.0, color: Colors.black,),
+                                child: Icon(
+                                  Icons.shopping_bag,
+                                  size: 25.0,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           )

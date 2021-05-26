@@ -9,6 +9,7 @@ class Product with ChangeNotifier{
   final double price;
   final int qty;
   final bool isFav;
+  final bool isPopular;
 
-  Product(this.id, this.name, this.description, this.category, this.imgUrl, this.price, this.qty, this.isFav);
+  Product(this.id, this.name, this.description, this.category, this.imgUrl, this.price, this.qty, this.isFav, this.isPopular);
 }

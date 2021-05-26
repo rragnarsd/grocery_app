@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
+import 'package:grocery_app/widgets/product_details.dart';
 import 'package:provider/provider.dart';
 
 class FeedsProducts extends StatefulWidget {
@@ -16,7 +17,8 @@ class _FeedsProductsState extends State<FeedsProducts> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onTap: () => Navigator.of(context).pushNamed('/ProductDetails'),
+        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName, arguments: productProvider.id),
+        /*onTap: () => Navigator.of(context).pushNamed('/ProductDetails'),*/
         child: Container(
           width: 250.0,
           height: 290.0,

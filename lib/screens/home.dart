@@ -1,10 +1,11 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/widgets/backlayer.dart';
 import 'package:grocery_app/widgets/categories.dart';
 import 'package:grocery_app/widgets/popular_products.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery_app/provider/products.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/HomeScreen';
@@ -16,6 +17,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<Products>(context);
+    final popularItems = productsData.popularProducts;
+    print('popularItems length ${popularItems.length}');
+
     return Scaffold(
         body: BackdropScaffold(
       /*frontLayerBackgroundColor: Colors.grey.shade200,*/
@@ -95,9 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.symmetric(horizontal: 3),
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                itemCount: popularItems.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return PopularProducts();
+                  return ChangeNotifierProvider.value(
+                    value: popularItems[index],
+                    child: PopularProducts(),
+                  );
                 }),
           )
         ]),

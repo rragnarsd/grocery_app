@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'categories_feeds.dart';
+
 class Categories extends StatefulWidget {
   final int index;
 
@@ -19,7 +21,10 @@ class _CategoriesState extends State<Categories> {
       'categoryName': 'Fruits',
       'categoryPath': 'assets/images/julia-zolotova-M.jpg'
     },
-    {'categoryName': 'Drinks', 'categoryPath': 'assets/images/mahbod-akhzam.jpg'},
+    {
+      'categoryName': 'Drinks',
+      'categoryPath': 'assets/images/mahbod-akhzam.jpg'
+    },
   ];
 
   @override
@@ -27,8 +32,8 @@ class _CategoriesState extends State<Categories> {
     return Stack(children: [
       InkWell(
         onTap: () {
-          Navigator.of(context)
-              .pushNamed('/FeedsScreen');
+          Navigator.of(context).pushNamed(CategoriesFeedsScreen.routeName,
+              arguments: '${categories[widget.index]['categoryName']}');
         },
         child: Container(
           decoration: BoxDecoration(

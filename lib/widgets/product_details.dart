@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/widgets/feed_products.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery_app/provider/products.dart';
 
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
@@ -10,14 +12,19 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<Products>(context);
+    final productList = productProvider.products;
+    final productId = ModalRoute.of(context).settings.arguments as String;
+    print('id ${productId}');
+    final prodAttr = productProvider.byId(productId);
     return Scaffold(
       /*backgroundColor: Colors.grey.shade200,*/
       body: Stack(
         children: [
           Container(
-            /*width: double.infinity,*/
+            width: double.infinity,
             child: Image.network(
-                'https://images.unsplash.com/photo-1569794858152-96eff8472dc7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1900&q=80'),
+              prodAttr.imgUrl),
           ),
           SingleChildScrollView(
             child: Column(
@@ -38,7 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           children: [
                             Container(
                               child: Text(
-                                'Title',
+                                prodAttr.name,
                                 style: TextStyle(
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.w500,
@@ -49,7 +56,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               height: 10.0,
                             ),
                             Text(
-                              '\$15.0',
+                              '\$ ${prodAttr.price}',
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w500,
@@ -85,11 +92,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         Details(
                           category: 'Category: ',
-                          title: 'Meat',
+                          title: prodAttr.category,
                         ),
                         Details(
                           category: 'Name: ',
-                          title: 'Hot Dogs',
+                          title: prodAttr.name,
                         ),
                         SizedBox(
                           height: 10.0,
@@ -122,7 +129,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             itemCount: 5,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
-                              return FeedsProducts();
+                              return ChangeNotifierProvider.value(
+                                  value: productList[index],
+                                  child: FeedsProducts(),
+                              );
                             },
                           ),
                         ),
