@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/widgets/feed_products.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/products.dart';
@@ -15,7 +16,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productProvider = Provider.of<Products>(context);
     final productList = productProvider.products;
     final productId = ModalRoute.of(context).settings.arguments as String;
-    print('id ${productId}');
+    final cartProvider = Provider.of<CartProvider>(context);
     final prodAttr = productProvider.byId(productId);
     return Scaffold(
       /*backgroundColor: Colors.grey.shade200,*/
@@ -179,10 +180,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                         shape: RoundedRectangleBorder(side: BorderSide.none),
                       ),
                       child: Text(
-                        'Add to Cart',
+                        cartProvider.getCartItems.containsKey(productId) ? 'In Cart' : 'Add to Cart',
                         style: TextStyle(fontSize: 18.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        //ATH..Make this button disabled when clicked
+                        cartProvider.addItemsToCart(productId, prodAttr.price, prodAttr.name, prodAttr.imgUrl);
+                      },
                     ),
                   ),
                 )

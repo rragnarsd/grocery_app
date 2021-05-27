@@ -1,6 +1,7 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/feeds.dart';
 import 'package:grocery_app/widgets/backlayer.dart';
 import 'package:grocery_app/widgets/categories.dart';
 import 'package:grocery_app/widgets/popular_products.dart';
@@ -89,7 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 TextButton(
                   child: Text('View More'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'popular');
+                  },
                 )
               ],
             ),

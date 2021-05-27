@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/widgets/cart_empty.dart';
 import 'package:grocery_app/widgets/cart_full.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
   @override
   Widget build(BuildContext context) {
-    List products = [];
-    return products.isNotEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+    /*List products = [];*/
+    return cartProvider.getCartItems.isEmpty
         ? Scaffold(body: CartEmpty())
         : Scaffold(
             appBar: AppBar(
@@ -15,14 +18,21 @@ class CartScreen extends StatelessWidget {
               actions: [IconButton(icon: Icon(Icons.delete), onPressed: () {})],
             ),
             body: Column(
-              /*mainAxisAlignment: MainAxisAlignment.spaceBetween,*/
               children: [
                 Expanded(
                   child: Container(
                     child: ListView.builder(
-                      itemCount: 4,
+                      itemCount: cartProvider.getCartItems.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CartFull();
+                        return CartFull(
+                          //convert the map object to a list
+                          id: cartProvider.getCartItems.values.toList()[index].id,
+                          productId: cartProvider.getCartItems.keys.toList()[index],
+                          name: cartProvider.getCartItems.values.toList()[index].name,
+                          imgUrl: cartProvider.getCartItems.values.toList()[index].imgUrl,
+                          price: cartProvider.getCartItems.values.toList()[index].price,
+                          qty: cartProvider.getCartItems.values.toList()[index].qty,
+                        );
                       },
                     ),
                   ),

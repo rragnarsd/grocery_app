@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CartFull extends StatefulWidget {
+  //dependency injection - pass data through constructor
+  final String id;
+  final String productId;
+  final String name;
+  final String imgUrl;
+  final double price;
+  final int qty;
+
+  CartFull(
+      {@required this.id,
+      @required this.productId,
+      @required this.name,
+      @required this.imgUrl,
+      @required this.price,
+      @required this.qty});
+
   @override
   _CartFullState createState() => _CartFullState();
 }
@@ -8,6 +24,7 @@ class CartFull extends StatefulWidget {
 class _CartFullState extends State<CartFull> {
   @override
   Widget build(BuildContext context) {
+    double total = widget.price * widget.qty;
     return SafeArea(
       child: Container(
         height: 140.0,
@@ -17,15 +34,15 @@ class _CartFullState extends State<CartFull> {
               bottomRight: Radius.circular(16.0),
               topRight: Radius.circular(16.0),
             ),
-            color: Colors.grey.shade200),
+            color: Colors.grey.shade200,
+        ),
         child: Row(
           children: [
             Container(
               width: 130.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                      'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1700&q=80'),
+                  image: NetworkImage(widget.imgUrl),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -41,7 +58,7 @@ class _CartFullState extends State<CartFull> {
                       children: [
                         Flexible(
                           child: Text(
-                            'Title',
+                            widget.name,
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
@@ -64,9 +81,10 @@ class _CartFullState extends State<CartFull> {
                           width: 5,
                         ),
                         Text(
-                          '200\$',
+                          '\$${widget.price}',
                           style: TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.w500,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
@@ -78,17 +96,23 @@ class _CartFullState extends State<CartFull> {
                           width: 5,
                         ),
                         Text(
-                          '200\$',
+                          '\$${total}',
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
-                              color: Colors.indigo),
+                              color: Colors.indigo,
+                          ),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Quantity:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),),
+                        Text(
+                          'Quantity:',
+                          style: TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         Spacer(),
                         InkWell(
                           child: Container(
@@ -103,8 +127,11 @@ class _CartFullState extends State<CartFull> {
                           elevation: 10,
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.10,
-                            padding: EdgeInsets.all(10.0), child:
-                                Text('1', textAlign: TextAlign.center,),
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              widget.qty.toString(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         SizedBox(
