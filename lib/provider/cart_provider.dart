@@ -18,26 +18,53 @@ class CartProvider with ChangeNotifier {
   }
 
   //Add products to cart
-  void addItemsToCart(String productId, double price, String name, String imgUrl) {
-  //if the item already exist in the cart, then update the qty else add it to the cart
-    if(_cartItems.containsKey(productId)) {
-      _cartItems.update(productId, (existingCartItem) => CartAttr(
-        id: existingCartItem.id,
-        name: existingCartItem.name,
-        price: existingCartItem.price,
-        qty: existingCartItem.qty + 1,
-        imgUrl: existingCartItem.imgUrl
-      ));
+  void addItemsToCart(
+      String productId, double price, String name, String imgUrl) {
+    //if the item already exist in the cart, then update the qty else add it to the cart
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (existingCartItem) => CartAttr(
+              id: existingCartItem.id,
+              name: existingCartItem.name,
+              price: existingCartItem.price,
+              qty: existingCartItem.qty + 1,
+              imgUrl: existingCartItem.imgUrl));
     } else {
-        _cartItems.putIfAbsent(
-            productId, () => CartAttr(
-            id: DateTime.now().toString(),
-            name: name,
-            price: price,
-            qty: 1,
-            imgUrl: imgUrl
-        ));
+      _cartItems.putIfAbsent(
+          productId,
+          () => CartAttr(
+              id: DateTime.now().toString(),
+              name: name,
+              price: price,
+              qty: 1,
+              imgUrl: imgUrl));
     }
+    notifyListeners();
+  }
+
+  void reduceItemsInCart(
+      String productId, double price, String name, String imgUrl) {
+    if (_cartItems.containsKey(productId)) {
+      _cartItems.update(
+          productId,
+          (existingCartItem) => CartAttr(
+              id: existingCartItem.id,
+              name: existingCartItem.name,
+              price: existingCartItem.price,
+              qty: existingCartItem.qty - 1,
+              imgUrl: existingCartItem.imgUrl));
+    }
+    notifyListeners();
+  }
+
+  void removeItemFromCart(String productId) {
+    _cartItems.remove(productId);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _cartItems.clear();
     notifyListeners();
   }
 }

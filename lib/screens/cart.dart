@@ -14,8 +14,14 @@ class CartScreen extends StatelessWidget {
         ? Scaffold(body: CartEmpty())
         : Scaffold(
             appBar: AppBar(
-              title: Text('Cart Items'),
-              actions: [IconButton(icon: Icon(Icons.delete), onPressed: () {})],
+              title: Text('Cart (${cartProvider.getCartItems.length})'),
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      cartProvider.clearCart();
+                    })
+              ],
             ),
             body: Column(
               children: [
@@ -24,14 +30,14 @@ class CartScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: cartProvider.getCartItems.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CartFull(
-                          //convert the map object to a list
-                          id: cartProvider.getCartItems.values.toList()[index].id,
-                          productId: cartProvider.getCartItems.keys.toList()[index],
-                          name: cartProvider.getCartItems.values.toList()[index].name,
-                          imgUrl: cartProvider.getCartItems.values.toList()[index].imgUrl,
-                          price: cartProvider.getCartItems.values.toList()[index].price,
-                          qty: cartProvider.getCartItems.values.toList()[index].qty,
+                        return ChangeNotifierProvider.value(
+                          value:
+                              cartProvider.getCartItems.values.toList()[index],
+                          child: CartFull(
+                            //convert the map object to a list
+                            productId:
+                                cartProvider.getCartItems.keys.toList()[index],
+                          ),
                         );
                       },
                     ),

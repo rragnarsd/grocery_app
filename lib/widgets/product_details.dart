@@ -13,7 +13,7 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<Products>(context);
+    final productProvider = Provider.of<Products>(context, listen: false);
     final productList = productProvider.products;
     final productId = ModalRoute.of(context).settings.arguments as String;
     final cartProvider = Provider.of<CartProvider>(context);

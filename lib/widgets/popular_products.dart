@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/widgets/product_details.dart';
 import 'package:provider/provider.dart';
+import 'package:grocery_app/provider/cart_provider.dart';
 
 class PopularProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Product>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -24,9 +26,8 @@ class PopularProducts extends StatelessWidget {
               bottomLeft: Radius.circular(10.0),
               bottomRight: Radius.circular(10.0),
             ),
-           onTap: () => Navigator.pushNamed(context, ProductDetails.routeName, arguments: productProvider.id),
-           /* onTap: () => Navigator.of(context)
-                .pushNamed('/ProductDetails'),*/
+            onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
+                arguments: productProvider.id),
             child: Column(
               children: [
                 Stack(
@@ -100,11 +101,22 @@ class PopularProducts extends StatelessWidget {
                           Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: cartProvider.getCartItems
+                                      .containsKey(productProvider.id)
+                                  ? () {}
+                                  : () {
+                                      cartProvider.addItemsToCart(
+                                          productProvider.id,
+                                          productProvider.price,
+                                          productProvider.name,
+                                          productProvider.imgUrl);
+                                    },
                               borderRadius: BorderRadius.circular(20.0),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Icon(
+                                  cartProvider.getCartItems
+                                      .containsKey(productProvider.id) ? Icons.done_all :
                                   Icons.shopping_bag,
                                   size: 25.0,
                                   color: Colors.black,
