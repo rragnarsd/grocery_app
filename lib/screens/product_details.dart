@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
+import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:grocery_app/widgets/feed_products.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/products.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/ProductDetails';
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Products>(context, listen: false);
@@ -18,6 +19,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final cartProvider = Provider.of<CartProvider>(context);
     final prodAttr = productProvider.byId(productId);
+    final favProvider = Provider.of<FavProvider>(context);
     return Scaffold(
       /*backgroundColor: Colors.grey.shade200,*/
       body: Stack(
@@ -25,7 +27,8 @@ class _ProductDetailsState extends State<ProductDetails> {
           Container(
             width: double.infinity,
             child: Image.network(
-              prodAttr.imgUrl),
+              prodAttr.imgUrl,
+            ),
           ),
           SingleChildScrollView(
             child: Column(
@@ -131,8 +134,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
                               return ChangeNotifierProvider.value(
-                                  value: productList[index],
-                                  child: FeedsProducts(),
+                                value: productList[index],
+                                child: FeedsProducts(),
                               );
                             },
                           ),
@@ -153,12 +156,17 @@ class _ProductDetailsState extends State<ProductDetails> {
             right: 0,
             child: AppBar(
               backgroundColor: Colors.black.withOpacity(0.4),
-              /*  elevation: 0,*/
+              elevation: 0,
               actions: [
                 IconButton(
                   icon: Icon(Icons.favorite),
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed('/WishListScreen'),
+                  /*       onPressed: () {
+                    favProvider.addAndRemoveFromFav(productId, prodAttr.price,
+                        prodAttr.name, prodAttr.imgUrl);
+                    Navigator.pop(context);
+                  },*/
+
+                  /* Navigator.of(context).pushNamed('/WishListScreen'),*/
                 ),
                 IconButton(
                   icon: Icon(Icons.shopping_cart),
@@ -172,7 +180,27 @@ class _ProductDetailsState extends State<ProductDetails> {
             alignment: Alignment.bottomRight,
             child: Row(
               children: [
+               /* Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 50.0,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(side: BorderSide.none), primary: Colors.grey
+                      ),
+                      child: Text(
+                        'Fav',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      onPressed: () {
+                        favProvider.addAndRemoveFromFav(productId, prodAttr.price,
+                            prodAttr.name, prodAttr.imgUrl);
+                      },
+                    ),
+                  ),
+                ),*/
                 Expanded(
+                  flex: 2,
                   child: Container(
                     height: 50.0,
                     child: ElevatedButton(
@@ -180,19 +208,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                         shape: RoundedRectangleBorder(side: BorderSide.none),
                       ),
                       child: Text(
-                        cartProvider.getCartItems.containsKey(productId) ? 'In Cart' : 'Add to Cart',
+                        cartProvider.getCartItems.containsKey(productId)
+                            ? 'In Cart'
+                            : 'Add to Cart',
                         style: TextStyle(fontSize: 18.0),
                       ),
                       onPressed: () {
                         //ATH..Make this button disabled when clicked
-                        cartProvider.addItemsToCart(productId, prodAttr.price, prodAttr.name, prodAttr.imgUrl);
+                        cartProvider.addItemsToCart(productId, prodAttr.price,
+                            prodAttr.name, prodAttr.imgUrl);
                       },
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

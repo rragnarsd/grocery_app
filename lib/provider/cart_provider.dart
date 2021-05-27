@@ -38,7 +38,8 @@ class CartProvider with ChangeNotifier {
               name: name,
               price: price,
               qty: 1,
-              imgUrl: imgUrl));
+              imgUrl: imgUrl),
+      );
     }
     notifyListeners();
   }

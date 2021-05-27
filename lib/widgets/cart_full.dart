@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/models/cart_attr.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/services/global_methods.dart';
-import 'package:grocery_app/widgets/product_details.dart';
+import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
 class CartFull extends StatefulWidget {
@@ -25,7 +25,7 @@ class _CartFullState extends State<CartFull> {
     double total = cartAttr.price * cartAttr.qty;
     return SafeArea(
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
+        onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
             arguments: widget.productId),
         child: Container(
           height: 140.0,

@@ -131,7 +131,8 @@ class _UserScreenState extends State<UserScreen> {
                           title: Text('Cart'),
                           trailing: Icon(Icons.chevron_right),
                           leading: Icon(Icons.shopping_cart),
-                          onTap: () {},
+                          onTap: () => Navigator.of(context)
+                              .pushNamed('/CartScreen'),
                         ),
                       ),
                     ),
@@ -151,16 +152,13 @@ class _UserScreenState extends State<UserScreen> {
                     UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 1),
                     UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
                     UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 3),
-                    /* userListTile('Email', 'Email sub', 0, context),
-                    userListTile('Phone', '444444', 0, context),
-                    userListTile('Address', 'Karanes', 0, context),
-                    userListTile('Joined Date', 'date', 0, context),*/
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'Settings',
                         style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                            fontSize: 20.0, fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     Divider(

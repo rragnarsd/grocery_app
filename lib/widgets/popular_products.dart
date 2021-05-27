@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
-import 'package:grocery_app/widgets/product_details.dart';
+import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 
@@ -26,7 +26,7 @@ class PopularProducts extends StatelessWidget {
               bottomLeft: Radius.circular(10.0),
               bottomRight: Radius.circular(10.0),
             ),
-            onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
+            onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
                 arguments: productProvider.id),
             child: Column(
               children: [
