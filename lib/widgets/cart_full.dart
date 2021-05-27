@@ -3,6 +3,7 @@ import 'package:grocery_app/models/cart_attr.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/widgets/product_details.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CartFull extends StatefulWidget {
   final String productId;
@@ -14,27 +15,34 @@ class CartFull extends StatefulWidget {
 }
 
 class _CartFullState extends State<CartFull> {
-  void _showDialog(String title, String subtitle, Function function) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Column(
-              children: [
-                Icon(
-                  Icons.warning,
-                  size: 50.0,
-                ),
-                Text('Are you sure you want to clear the cart?'),
-              ],
-            ),
-            content: Text(subtitle),
-            actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
-              TextButton(onPressed: function, child: Text('Okay')),
-            ],
-          );
-        });
+  void _onAlertButtonsPressed(Function function){
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: "Are you sure you want to delete this item?",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Cancel",
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Colors.white,
+          border: Border.all(color: Colors.indigo)
+        ),
+        DialogButton(
+          child: Text(
+            "Delete",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            function();
+            Navigator.pop(context);
+            },
+          color: Colors.indigo,
+        )
+      ],
+    ).show();
   }
 
   @override
@@ -91,9 +99,12 @@ class _CartFullState extends State<CartFull> {
                             child: Container(
                               child: Icon(Icons.delete),
                             ),
-                            onTap: () {
-                              _showDialog('title', 'subtitle', () => cartProvider.removeItemFromCart(widget.productId));
-                            },
+                          onTap: () {
+                            _onAlertButtonsPressed(
+                                    () =>
+                                    cartProvider.removeItemFromCart(
+                                        widget.productId));
+                            }
                           )
                         ],
                       ),
