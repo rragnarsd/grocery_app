@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/cart_attr.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
+import 'package:grocery_app/services/global_methods.dart';
 import 'package:grocery_app/widgets/product_details.dart';
 import 'package:provider/provider.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CartFull extends StatefulWidget {
   final String productId;
@@ -15,38 +15,11 @@ class CartFull extends StatefulWidget {
 }
 
 class _CartFullState extends State<CartFull> {
-  void _onAlertButtonsPressed(Function function){
-    Alert(
-      context: context,
-      type: AlertType.warning,
-      title: "Are you sure you want to delete this item?",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Cancel",
-            style: TextStyle(color: Colors.black, fontSize: 20),
-          ),
-          onPressed: () => Navigator.pop(context),
-          color: Colors.white,
-          border: Border.all(color: Colors.indigo)
-        ),
-        DialogButton(
-          child: Text(
-            "Delete",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () {
-            function();
-            Navigator.pop(context);
-            },
-          color: Colors.indigo,
-        )
-      ],
-    ).show();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    GlobalMethods globalMethods = GlobalMethods();
     final cartAttr = Provider.of<CartAttr>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     double total = cartAttr.price * cartAttr.qty;
@@ -99,12 +72,9 @@ class _CartFullState extends State<CartFull> {
                             child: Container(
                               child: Icon(Icons.delete),
                             ),
-                          onTap: () {
-                            _onAlertButtonsPressed(
-                                    () =>
-                                    cartProvider.removeItemFromCart(
-                                        widget.productId));
-                            }
+                         onTap: () {
+                              globalMethods.onAlertButtonsPressed(context, () => cartProvider.removeItemFromCart(widget.productId));
+                         },
                           )
                         ],
                       ),
@@ -115,7 +85,7 @@ class _CartFullState extends State<CartFull> {
                             width: 5,
                           ),
                           Text(
-                            '\$${cartAttr.price}',
+                            '\$${cartAttr.price.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
@@ -130,7 +100,7 @@ class _CartFullState extends State<CartFull> {
                             width: 5,
                           ),
                           Text(
-                            '\$${total}',
+                            '\$${total.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
@@ -163,9 +133,7 @@ class _CartFullState extends State<CartFull> {
                                 : () {
                                     cartProvider.reduceItemsInCart(
                                         widget.productId,
-                                        cartAttr.price,
-                                        cartAttr.name,
-                                        cartAttr.imgUrl);
+                                    );
                                   },
                           ),
                           SizedBox(
