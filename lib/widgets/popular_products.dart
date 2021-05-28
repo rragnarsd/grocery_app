@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
+import 'package:grocery_app/provider/fav_provider.dart';
 import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
@@ -9,6 +10,7 @@ class PopularProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Product>(context);
     final cartProvider = Provider.of<CartProvider>(context);
+    final favProvider = Provider.of<FavProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -44,19 +46,19 @@ class PopularProducts extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: 10,
-                      right: 12,
+                      top: 7,
+                      right: 10,
                       child: Icon(
-                        Icons.favorite,
-                        color: Colors.grey.shade800,
+                          Icons.favorite,
+                          color: favProvider.getFavItems.containsKey(productProvider.id) ? Colors.red : Colors.transparent
                       ),
                     ),
                     Positioned(
                       top: 7,
                       right: 10,
                       child: Icon(
-                        Icons.favorite,
-                        color: Colors.white,
+                        Icons.favorite_outline,
+                        color: Colors.white
                       ),
                     ),
                     Positioned(

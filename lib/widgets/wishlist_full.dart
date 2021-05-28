@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/models/fav_attr.dart';
+import 'package:grocery_app/provider/fav_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery_app/services/global_methods.dart';
 
 class WishListFull extends StatefulWidget {
+  final String productId;
+
+  WishListFull({this.productId});
   @override
   _WishListFullState createState() => _WishListFullState();
 }
@@ -8,6 +15,9 @@ class WishListFull extends StatefulWidget {
 class _WishListFullState extends State<WishListFull> {
   @override
   Widget build(BuildContext context) {
+    final favAttr = Provider.of<FavAttr>(context);
+    final favProvider = Provider.of<FavProvider>(context);
+    GlobalMethods globalMethods = GlobalMethods();
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Container(
@@ -25,12 +35,13 @@ class _WishListFullState extends State<WishListFull> {
               width: 130.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16.0),
-                    topLeft: Radius.circular(16.0),
+                  bottomLeft: Radius.circular(16.0),
+                  topLeft: Radius.circular(16.0),
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                      'https://images.unsplash.com/photo-1563789668716-c2033be91d2d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1929&q=80'),
+                    favAttr.imgUrl,
+                  ),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -48,7 +59,7 @@ class _WishListFullState extends State<WishListFull> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Title',
+                              favAttr.name,
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w700,
@@ -58,7 +69,7 @@ class _WishListFullState extends State<WishListFull> {
                               height: 10.0,
                             ),
                             Text(
-                              'Price',
+                              '\$${favAttr.price.toStringAsFixed(2)}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w500,
@@ -70,7 +81,12 @@ class _WishListFullState extends State<WishListFull> {
                           child: Container(
                             child: Icon(Icons.delete),
                           ),
-                          onTap: () {},
+                          onTap: () => {
+                            globalMethods.onAlertButtonsPressed(
+                                context,
+                                () => favProvider
+                                    .removeItemFromFav(widget.productId))
+                          },
                         )
                       ],
                     ),

@@ -13,12 +13,17 @@ class WishListScreen extends StatelessWidget {
         ? Scaffold(body: WishListEmpty())
         : Scaffold(
             appBar: AppBar(
-              title: Text('Wishlist'),
+              title: Text('Wishlist (${favProvider.getFavItems.length})'),
             ),
             body: ListView.builder(
-              itemCount: 4,
+              itemCount: favProvider.getFavItems.length,
                 itemBuilder: (BuildContext context, int index) {
-              return WishListFull();
+              return ChangeNotifierProvider.value(
+                  value: favProvider.getFavItems.values.toList()[index],
+                  child: WishListFull(
+                    productId: favProvider.getFavItems.keys.toList()[index],
+                  ),
+              );
             }),
           );
   }

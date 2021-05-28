@@ -38,7 +38,9 @@ class WishListEmpty extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/FeedsScreen');
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
