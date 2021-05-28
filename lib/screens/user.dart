@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/constants.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
 
 class UserScreen extends StatefulWidget {
@@ -43,7 +44,6 @@ class _UserScreenState extends State<UserScreen> {
                       centerTitle: true,
                       title: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        /* mainAxisAlignment: MainAxisAlignment.spaceAround,*/
                         children: [
                           AnimatedOpacity(
                             opacity: top <= 110.0 ? 1.0 : 0,
@@ -104,8 +104,7 @@ class _UserScreenState extends State<UserScreen> {
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'User Bag',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                        style: kTextStyleMedium
                       ),
                     ),
                     Divider(
@@ -156,11 +155,9 @@ class _UserScreenState extends State<UserScreen> {
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'Settings',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w500,
+                        style: kTextStyleMedium
                         ),
                       ),
-                    ),
                     Divider(
                       thickness: 1,
                       color: Colors.grey,

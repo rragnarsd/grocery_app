@@ -4,6 +4,8 @@ import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/services/global_methods.dart';
 
+import '../constants.dart';
+
 class WishListFull extends StatefulWidget {
   final String productId;
 
@@ -23,29 +25,19 @@ class _WishListFullState extends State<WishListFull> {
       child: Container(
         height: 100.0,
         margin: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(16.0),
-          ),
-          color: Colors.grey.shade200,
-        ),
+        decoration: kBoxDecorationAll.copyWith(color: Colors.grey.shade200),
         child: Row(
           children: [
             Container(
-              width: 130.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16.0),
-                  topLeft: Radius.circular(16.0),
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    favAttr.imgUrl,
+                width: 130.0,
+                decoration: kBoxDecorationOnly.copyWith(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      favAttr.imgUrl,
+                    ),
+                    fit: BoxFit.fill,
                   ),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+                )),
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -58,23 +50,15 @@ class _WishListFullState extends State<WishListFull> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              favAttr.name,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
+                            Text(favAttr.name,
+                                style: kTextStyleSmall.copyWith(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700)),
                             SizedBox(
                               height: 10.0,
                             ),
-                            Text(
-                              '\$${favAttr.price.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
+                            Text('\$${favAttr.price.toStringAsFixed(2)}',
+                                style: kTextStyleSmall)
                           ],
                         ),
                         InkWell(

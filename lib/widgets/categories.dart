@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'categories_feeds.dart';
 
 class Categories extends StatefulWidget {
+  static const routeName = '/Categories';
   final int index;
 
   Categories({this.index});

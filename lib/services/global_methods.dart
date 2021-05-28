@@ -6,7 +6,8 @@ class GlobalMethods {
     Alert(
       context: context,
       type: AlertType.warning,
-      title: "Are you sure you want to delete this item?",
+      title: "Are you sure?",
+      desc: "This item will be removed!",
       buttons: [
         DialogButton(
             child: Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
-import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
+import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 
@@ -17,16 +17,14 @@ class PopularProducts extends StatelessWidget {
         width: 250,
         decoration: BoxDecoration(
             color: Colors.grey.shade200,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10.0),
-              bottomRight: Radius.circular(10.0),
+            borderRadius: BorderRadius.all(Radius.circular(10.0)
             )),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10.0),
-              bottomRight: Radius.circular(10.0),
+              topLeft: Radius.circular(10.0),
+              topRight: Radius.circular(10.0),
             ),
             onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
                 arguments: productProvider.id),
@@ -37,6 +35,10 @@ class PopularProducts extends StatelessWidget {
                     Container(
                       height: 170,
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
+                        ),
                         image: DecorationImage(
                           image: NetworkImage(
                             productProvider.imgUrl,
@@ -62,8 +64,7 @@ class PopularProducts extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      bottom: 32.0,
-                      right: 2,
+                      bottom: 0,
                       child: Container(
                         padding: EdgeInsets.all(10.0),
                         color: Colors.grey.shade200,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/services/global_methods.dart';
-import 'package:grocery_app/widgets/cart_empty.dart';
 import 'package:grocery_app/widgets/cart_full.dart';
+import 'package:grocery_app/widgets/cart_wishlist_empty.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 
@@ -13,7 +13,7 @@ class CartScreen extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
 
     return cartProvider.getCartItems.isEmpty
-        ? Scaffold(body: CartEmpty())
+        ? Scaffold(body: CartWishEmpty(title: 'Your Cart is Empty', subTitle: 'Would you like to buy something?', screen: '/FeedsScreen', btnText: 'Shop Now',))
         : Scaffold(
             appBar: AppBar(
               title: Text('Cart (${cartProvider.getCartItems.length})'),

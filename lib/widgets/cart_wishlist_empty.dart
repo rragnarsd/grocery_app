@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 
-class CartEmpty extends StatelessWidget {
+class CartWishEmpty extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final String screen;
+  final String btnText;
+
+  CartWishEmpty({this.title, this.subTitle, this.screen, this.btnText});
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          margin: EdgeInsets.only(top: 80),
           width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.4,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/carts.jpg'),
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-        Text(
-          'Your cart is empty',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
         ),
         SizedBox(
           height: 20,
         ),
         Text(
-          'Would you like to buy something?',
+         title,
+          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          subTitle,
           style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
         ),
         SizedBox(
@@ -38,11 +42,13 @@ class CartEmpty extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(screen);
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                'Shop Now',
+               btnText,
                 style: TextStyle(
                   fontSize: 18,
                 ),

@@ -18,6 +18,9 @@ class FeedsScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Products'),
+      ),
       body: GridView.count(
         childAspectRatio: 260/300,
         crossAxisSpacing: 8,

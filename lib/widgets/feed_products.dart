@@ -1,7 +1,6 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
-import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
+import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
 class FeedsProducts extends StatefulWidget {
@@ -18,7 +17,6 @@ class _FeedsProductsState extends State<FeedsProducts> {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName, arguments: productProvider.id),
-        /*onTap: () => Navigator.of(context).pushNamed('/ProductDetails'),*/
         child: Container(
           width: 250.0,
           height: 290.0,
@@ -44,16 +42,6 @@ class _FeedsProductsState extends State<FeedsProducts> {
                     ),
                   ),
                 ),
-                Badge(
-                  toAnimate: true,
-                  shape: BadgeShape.square,
-                  badgeColor: Colors.indigo,
-                  borderRadius: BorderRadius.circular(5.0),
-                  badgeContent: Text(
-                    'New',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
               ]),
               Container(
                 padding: EdgeInsets.all(10.0),
@@ -72,7 +60,8 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       '\$ ${productProvider.price.toString()}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w700),
+                          fontSize: 16.0, fontWeight: FontWeight.w700,
+                      ),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -84,7 +73,8 @@ class _FeedsProductsState extends State<FeedsProducts> {
                           'Quantity: ${productProvider.qty}',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade400),
+                              color: Colors.grey.shade400,
+                          ),
                         ),
                         InkWell(
                           onTap: () {},

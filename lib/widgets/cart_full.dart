@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/models/cart_attr.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/services/global_methods.dart';
-import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
+import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
+
+import '../constants.dart';
 
 class CartFull extends StatefulWidget {
   final String productId;
@@ -61,10 +63,7 @@ class _CartFullState extends State<CartFull> {
                           Flexible(
                             child: Text(
                               cartAttr.name,
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: kTextStyleSmall,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -86,10 +85,7 @@ class _CartFullState extends State<CartFull> {
                           ),
                           Text(
                             '\$${cartAttr.price.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: kTextStyleSmall
                           ),
                         ],
                       ),
@@ -101,11 +97,7 @@ class _CartFullState extends State<CartFull> {
                           ),
                           Text(
                             '\$${total.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.indigo,
-                            ),
+                            style: kTextStyleSmall.copyWith(color: Colors.indigo)
                           ),
                         ],
                       ),
@@ -113,10 +105,7 @@ class _CartFullState extends State<CartFull> {
                         children: [
                           Text(
                             'Quantity:',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: kTextStyleSmall,
                           ),
                           Spacer(),
                           InkWell(

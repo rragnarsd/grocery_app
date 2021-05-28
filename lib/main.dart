@@ -6,7 +6,7 @@ import 'package:grocery_app/screens/cart.dart';
 import 'package:grocery_app/screens/feeds.dart';
 import 'package:grocery_app/screens/wishlist.dart';
 import 'package:grocery_app/widgets/categories_feeds.dart';
-import 'file:///C:/Users/regin/AndroidStudioProjects/grocery_app/lib/screens/product_details.dart';
+import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
 import 'screens/bottom_bar.dart';
 
