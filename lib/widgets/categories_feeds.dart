@@ -12,6 +12,9 @@ class CategoriesFeedsScreen extends StatelessWidget {
     final categoryName = ModalRoute.of(context).settings.arguments as String;
     final productList = productProvider.byCategory(categoryName);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(categoryName),
+      ),
         body: GridView.count(
             childAspectRatio: 260/300,
             crossAxisSpacing: 8,

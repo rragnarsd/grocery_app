@@ -68,7 +68,7 @@ class PopularProducts extends StatelessWidget {
                         padding: EdgeInsets.all(10.0),
                         color: Colors.grey.shade200,
                         child: Text(
-                          '\$ ${productProvider.price}',
+                          '\$ ${productProvider.price.toStringAsFixed(2)}',
                           style: TextStyle(color: Colors.grey.shade800),
                         ),
                       ),

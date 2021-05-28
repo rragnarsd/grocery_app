@@ -23,96 +23,97 @@ class _HomeScreenState extends State<HomeScreen> {
     print('popularItems length ${popularItems.length}');
 
     return Scaffold(
-        body: BackdropScaffold(
-      /*frontLayerBackgroundColor: Colors.grey.shade200,*/
-      /*headerHeight: MediaQuery.of(context).size.height * 0.25,*/
-      appBar: BackdropAppBar(
+      appBar: AppBar(
         title: Text('Grocery'),
       ),
-      backLayer: BackLayerMenu(),
-      frontLayer: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            height: 190.0,
-            width: double.infinity,
-            child: Carousel(
-              boxFit: BoxFit.fill,
-              autoplay: true,
-              animationCurve: Curves.fastOutSlowIn,
-              animationDuration: Duration(milliseconds: 1000),
-              dotSize: 7.0,
-              dotIncreasedColor: Colors.white,
-              dotBgColor: Colors.black.withOpacity(0.2),
-              dotPosition: DotPosition.bottomCenter,
-              showIndicator: true,
-              indicatorBgPadding: 7.0,
-              images: [
-                ExactAssetImage('assets/images/charles-gao.jpg'),
-                ExactAssetImage('assets/images/gemma.jpg'),
-                ExactAssetImage('assets/images/mehrad-vosoughi.jpg'),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 190.0,
+              width: double.infinity,
+              child: Carousel(
+                boxFit: BoxFit.fill,
+                autoplay: true,
+                animationCurve: Curves.fastOutSlowIn,
+                animationDuration: Duration(milliseconds: 1000),
+                dotSize: 7.0,
+                dotIncreasedColor: Colors.white,
+                dotBgColor: Colors.black.withOpacity(0.2),
+                dotPosition: DotPosition.bottomCenter,
+                showIndicator: true,
+                indicatorBgPadding: 7.0,
+                images: [
+                  ExactAssetImage('assets/images/charles-gao.jpg'),
+                  ExactAssetImage('assets/images/gemma.jpg'),
+                  ExactAssetImage('assets/images/mehrad-vosoughi.jpg'),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Categories',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
-                ),
-                TextButton(
-                  child: Text('View More'),
-                  onPressed: () {},
-                )
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Categories',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                  ),
+                  TextButton(
+                    child: Text('View More'),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'categories');
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 180.0,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return Categories(index: index);
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Popular Products',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
-                ),
-                TextButton(
-                  child: Text('View More'),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'popular');
-                  },
-                )
-              ],
+            Container(
+              width: double.infinity,
+              height: 180.0,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Categories(index: index);
+                  }),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 285.0,
-            margin: EdgeInsets.symmetric(horizontal: 3),
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: popularItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ChangeNotifierProvider.value(
-                    value: popularItems[index],
-                    child: PopularProducts(),
-                  );
-                }),
-          )
-        ]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Popular Products',
+                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                  ),
+                  TextButton(
+                    child: Text('View More'),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(FeedsScreen.routeName, arguments: 'popular');
+                    },
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 285.0,
+              margin: EdgeInsets.symmetric(horizontal: 3),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: popularItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ChangeNotifierProvider.value(
+                      value: popularItems[index],
+                      child: PopularProducts(),
+                    );
+                  }),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

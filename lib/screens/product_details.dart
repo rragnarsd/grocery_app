@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
@@ -22,7 +23,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final prodAttr = productProvider.byId(productId);
     final favProvider = Provider.of<FavProvider>(context);
     return Scaffold(
-      /*backgroundColor: Colors.grey.shade200,*/
       body: Stack(
         children: [
           Container(
@@ -34,37 +34,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SingleChildScrollView(
             child: ProductBody(prodAttr: prodAttr, productList: productList),
           ),
-          /* Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              backgroundColor: Colors.black.withOpacity(0.4),
-              elevation: 0,
-              actions: [
-               */ /* IconButton(
-                  icon: Icon(Icons.favorite),
-                         onPressed: () {
-                    favProvider.addAndRemoveFromFav(productId, prodAttr.price,
-                        prodAttr.name, prodAttr.imgUrl);
-                    Navigator.pop(context);
-                  },
-
-                   */ /**/ /*Navigator.of(context).pushNamed('/WishListScreen'),*/ /**/ /*
-                ),*/ /*
-                IconButton(
-                  icon: Icon(Icons.shopping_cart),
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed('/CartScreen'),
-                )
-              ],
-            ),
-          ),*/
           CartBottomBar(
-              cartProvider: cartProvider,
-              productId: productId,
-              prodAttr: prodAttr,
-              favProvider: favProvider),
+            cartProvider: cartProvider,
+            productId: productId,
+            prodAttr: prodAttr,
+            favProvider: favProvider,
+          ),
         ],
       ),
     );
@@ -111,7 +86,7 @@ class ProductBody extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      '\$ ${prodAttr.price}',
+                      '\$ ${prodAttr.price.toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w500,
@@ -253,6 +228,32 @@ class CartBottomBar extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
+              color: Colors.white,
+              height: 50.0,
+              child: IconButton(
+                icon: Badge(
+                  badgeColor: Colors.indigo,
+                  animationType: BadgeAnimationType.slide,
+                  toAnimate: true,
+                  position: BadgePosition.topEnd(top: 5),
+                  badgeContent: Text(
+                    cartProvider.getCartItems.length.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.indigo,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/CartScreen');
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
               color: Colors.grey,
               height: 50.0,
               child: IconButton(
@@ -270,7 +271,7 @@ class CartBottomBar extends StatelessWidget {
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );
