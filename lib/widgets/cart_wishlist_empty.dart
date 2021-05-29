@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class CartWishEmpty extends StatelessWidget {
   final String title;
   final String subTitle;
@@ -22,14 +24,14 @@ class CartWishEmpty extends StatelessWidget {
         ),
         Text(
          title,
-          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600),
+          style: kTextStyleLarge
         ),
         SizedBox(
           height: 10,
         ),
         Text(
           subTitle,
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
+          style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400),
         ),
         SizedBox(
           height: 20,
@@ -49,9 +51,7 @@ class CartWishEmpty extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                btnText,
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+                style: kTextStyleSmall
               ),
             ),
           ),

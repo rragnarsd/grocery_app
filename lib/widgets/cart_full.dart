@@ -17,8 +17,6 @@ class CartFull extends StatefulWidget {
 }
 
 class _CartFullState extends State<CartFull> {
-
-
   @override
   Widget build(BuildContext context) {
     GlobalMethods globalMethods = GlobalMethods();
@@ -27,7 +25,8 @@ class _CartFullState extends State<CartFull> {
     double total = cartAttr.price * cartAttr.qty;
     return SafeArea(
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+        onTap: () => Navigator.pushNamed(
+            context, ProductDetailsScreen.routeName,
             arguments: widget.productId),
         child: Container(
           height: 140.0,
@@ -40,15 +39,10 @@ class _CartFullState extends State<CartFull> {
             children: [
               Container(
                 width: 130.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    bottomLeft: Radius.circular(10.0),
-                  ),
-                  image: DecorationImage(
-                    image: NetworkImage(cartAttr.imgUrl),
-                    fit: BoxFit.fill,
-                  ),
+                decoration: kBoxDecorationOnly.copyWith(
+                    image: DecorationImage(
+                        image: NetworkImage(cartAttr.imgUrl),
+                        fit: BoxFit.fill),
                 ),
               ),
               Flexible(
@@ -63,7 +57,7 @@ class _CartFullState extends State<CartFull> {
                           Flexible(
                             child: Text(
                               cartAttr.name,
-                              style: kTextStyleSmall,
+                              style: kTextStyleXSmall,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -71,9 +65,12 @@ class _CartFullState extends State<CartFull> {
                             child: Container(
                               child: Icon(Icons.delete),
                             ),
-                         onTap: () {
-                              globalMethods.onAlertButtonsPressed(context, () => cartProvider.removeItemFromCart(widget.productId));
-                         },
+                            onTap: () {
+                              globalMethods.onAlertButtonsPressed(
+                                  context,
+                                  () => cartProvider
+                                      .removeItemFromCart(widget.productId));
+                            },
                           )
                         ],
                       ),
@@ -83,10 +80,8 @@ class _CartFullState extends State<CartFull> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            '\$${cartAttr.price.toStringAsFixed(2)}',
-                            style: kTextStyleSmall
-                          ),
+                          Text('\$${cartAttr.price.toStringAsFixed(2)}',
+                              style: kTextStyleXSmall),
                         ],
                       ),
                       Row(
@@ -95,9 +90,9 @@ class _CartFullState extends State<CartFull> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            '\$${total.toStringAsFixed(2)}',
-                            style: kTextStyleSmall.copyWith(color: Colors.indigo)
+                          Text('\$${total.toStringAsFixed(2)}',
+                              style: kTextStyleXSmall.copyWith(
+                                  color: Colors.indigo),
                           ),
                         ],
                       ),
@@ -105,7 +100,7 @@ class _CartFullState extends State<CartFull> {
                         children: [
                           Text(
                             'Quantity:',
-                            style: kTextStyleSmall,
+                            style: kTextStyleXSmall,
                           ),
                           Spacer(),
                           InkWell(
@@ -121,7 +116,7 @@ class _CartFullState extends State<CartFull> {
                                 ? null
                                 : () {
                                     cartProvider.reduceItemsInCart(
-                                        widget.productId,
+                                      widget.productId,
                                     );
                                   },
                           ),

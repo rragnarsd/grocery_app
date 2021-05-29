@@ -139,8 +139,7 @@ class _UserScreenState extends State<UserScreen> {
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'Information',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w500),
+                        style: kTextStyleMedium
                       ),
                     ),
                     Divider(

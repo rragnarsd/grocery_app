@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/constants.dart';
 import 'package:grocery_app/screens/feeds.dart';
 import 'package:grocery_app/widgets/categories.dart';
 import 'package:grocery_app/widgets/popular_products.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Categories',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                    style: kTextStyleSmall
                   ),
                 ],
               ),
@@ -80,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'Popular Products',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                    style: kTextStyleSmall
                   ),
                   TextButton(
                     child: Text('View More'),

@@ -7,6 +7,8 @@ import 'package:grocery_app/widgets/feed_products.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/products.dart';
 
+import '../constants.dart';
+
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/ProductDetails';
   @override
@@ -76,10 +78,7 @@ class ProductBody extends StatelessWidget {
                     Container(
                       child: Text(
                         prodAttr.name,
-                        style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: kTextStyleLarge
                       ),
                     ),
                     SizedBox(
@@ -87,10 +86,7 @@ class ProductBody extends StatelessWidget {
                     ),
                     Text(
                       '\$ ${prodAttr.price.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: kTextStyleMedium
                     ),
                   ],
                 ),
@@ -110,7 +106,7 @@ class ProductBody extends StatelessWidget {
                     ),
                     Text(
                       'Description',
-                      style: TextStyle(fontSize: 20.0),
+                      style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)
                     ),
                     SizedBox(
                       height: 20.0,
@@ -145,10 +141,7 @@ class ProductBody extends StatelessWidget {
                     Container(
                       child: Text(
                         'Suggested Products',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: kTextStyleMedium
                       ),
                     ),
                     SizedBox(
@@ -215,7 +208,7 @@ class CartBottomBar extends StatelessWidget {
                   cartProvider.getCartItems.containsKey(productId)
                       ? 'In Cart'
                       : 'Add to Cart',
-                  style: TextStyle(fontSize: 18.0),
+                  style: kTextStyleSmall,
                 ),
                 onPressed: () {
                   //ATH..Make this button disabled when clicked
@@ -292,17 +285,11 @@ class Details extends StatelessWidget {
         children: [
           Text(
             category,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-            ),
+            style: kTextStyleMedium
           ),
           Text(
             title,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.w400,
-            ),
+            style: kTextStyleMedium.copyWith(fontWeight: FontWeight.normal)
           ),
         ],
       ),

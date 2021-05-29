@@ -347,5 +347,11 @@ class Products with ChangeNotifier {
     return _categoryList;
   }
 
-
+  List<Product> searchForProduct(String searchText) {
+    List _searchList = _products
+        .where((element) =>
+        element.name.toLowerCase().contains(searchText.toLowerCase()))
+        .toList();
+    return _searchList;
+  }
 }

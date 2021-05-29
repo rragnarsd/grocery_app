@@ -5,6 +5,8 @@ import 'package:grocery_app/widgets/cart_wishlist_empty.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 
+import '../constants.dart';
+
 class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
   @override
@@ -56,21 +58,14 @@ class CartScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Total:',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.indigo,
-                                ),
+                                style: kTextStyleSmall.copyWith(color: Colors.indigo)
                               ),
                               SizedBox(
                                 width: 5,
                               ),
                               Text(
                                 '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: kTextStyleSmall
                               )
                             ],
                           ),
@@ -81,7 +76,7 @@ class CartScreen extends StatelessWidget {
                             onPressed: () {},
                             child: Text(
                               'Check Out',
-                              style: TextStyle(fontSize: 16.0),
+                                style: kTextStyleXSmall
                             ),
                           ),
                         ),

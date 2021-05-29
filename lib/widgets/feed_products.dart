@@ -3,6 +3,8 @@ import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
+import '../constants.dart';
+
 class FeedsProducts extends StatefulWidget {
 
   @override
@@ -20,10 +22,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
         child: Container(
           width: 250.0,
           height: 290.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            color: Colors.grey.shade200,
-          ),
+        decoration: kBoxDecorationAll.copyWith(color: Colors.grey.shade200),
           child: Column(
             children: [
               Stack(children: [
@@ -59,9 +58,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                     Text(
                       '\$ ${productProvider.price.toString()}',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w700,
-                      ),
+                      style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.w700)
                     ),
                     SizedBox(
                       height: 5.0,
@@ -71,10 +68,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                       children: [
                         Text(
                           'Quantity: ${productProvider.qty}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade400,
-                          ),
+                         style: kTextStyleXSmall.copyWith(fontSize: 14.0, color: Colors.grey.shade400),
                         ),
                         InkWell(
                           onTap: () {},

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-const kTextStyleSmall = TextStyle(
+const kTextStyleXSmall = TextStyle(
   fontSize: 16.0,
+  fontWeight: FontWeight.w500,
+);
+
+const kTextStyleSmall = TextStyle(
+  fontSize: 18.0,
   fontWeight: FontWeight.w500,
 );
 
@@ -10,11 +15,17 @@ const kTextStyleMedium = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
+const kTextStyleLarge = TextStyle(
+  fontSize: 24.0,
+  fontWeight: FontWeight.w500,
+);
+
 const kBoxDecorationAll = BoxDecoration(
     borderRadius: BorderRadius.all(
       Radius.circular(10.0),
     ),
     color: Colors.grey,
+    image: null
 );
 
 const kBoxDecorationOnly = BoxDecoration(

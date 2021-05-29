@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/product.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
+
+import '../constants.dart';
 
 class PopularProducts extends StatelessWidget {
   @override
@@ -15,10 +18,7 @@ class PopularProducts extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: 250,
-        decoration: BoxDecoration(
-            color: Colors.grey.shade200,
-            borderRadius: BorderRadius.all(Radius.circular(10.0)
-            )),
+        decoration: kBoxDecorationAll.copyWith(color: Colors.grey.shade200),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -26,7 +26,8 @@ class PopularProducts extends StatelessWidget {
               topLeft: Radius.circular(10.0),
               topRight: Radius.circular(10.0),
             ),
-            onTap: () => Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+            onTap: () => Navigator.pushNamed(
+                context, ProductDetailsScreen.routeName,
                 arguments: productProvider.id),
             child: Column(
               children: [
@@ -34,11 +35,7 @@ class PopularProducts extends StatelessWidget {
                   children: [
                     Container(
                       height: 170,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0),
-                        ),
+                      decoration: kBoxDecorationOnly.copyWith(
                         image: DecorationImage(
                           image: NetworkImage(
                             productProvider.imgUrl,
@@ -50,18 +47,17 @@ class PopularProducts extends StatelessWidget {
                     Positioned(
                       top: 7,
                       right: 10,
-                      child: Icon(
-                          Icons.favorite,
-                          color: favProvider.getFavItems.containsKey(productProvider.id) ? Colors.red : Colors.transparent
+                      child: Icon(Icons.favorite,
+                          color: favProvider.getFavItems
+                                  .containsKey(productProvider.id)
+                              ? Colors.red
+                              : Colors.transparent,
                       ),
                     ),
                     Positioned(
                       top: 7,
                       right: 10,
-                      child: Icon(
-                        Icons.favorite_outline,
-                        color: Colors.white
-                      ),
+                      child: Icon(Icons.favorite_outline, color: Colors.white),
                     ),
                     Positioned(
                       bottom: 0,
@@ -84,10 +80,7 @@ class PopularProducts extends StatelessWidget {
                       Text(
                         productProvider.name,
                         maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.w700)
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,10 +89,7 @@ class PopularProducts extends StatelessWidget {
                             productProvider.description,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.w400)
                           ),
                           Material(
                             color: Colors.transparent,
@@ -119,8 +109,9 @@ class PopularProducts extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Icon(
                                   cartProvider.getCartItems
-                                      .containsKey(productProvider.id) ? Icons.done_all :
-                                  Icons.shopping_bag,
+                                          .containsKey(productProvider.id)
+                                      ? Icons.done_all
+                                      : Icons.shopping_bag,
                                   size: 25.0,
                                   color: Colors.black,
                                 ),

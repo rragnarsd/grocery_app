@@ -53,12 +53,14 @@ class _WishListFullState extends State<WishListFull> {
                             Text(favAttr.name,
                                 style: kTextStyleSmall.copyWith(
                                     fontSize: 18.0,
-                                    fontWeight: FontWeight.w700)),
+                                    fontWeight: FontWeight.w700),
+                            ),
                             SizedBox(
                               height: 10.0,
                             ),
                             Text('\$${favAttr.price.toStringAsFixed(2)}',
-                                style: kTextStyleSmall)
+                                style: kTextStyleXSmall,
+                            )
                           ],
                         ),
                         InkWell(

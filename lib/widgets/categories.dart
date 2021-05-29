@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import 'categories_feeds.dart';
 
 class Categories extends StatefulWidget {
@@ -37,12 +38,12 @@ class _CategoriesState extends State<Categories> {
               arguments: '${categories[widget.index]['categoryName']}');
         },
         child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              image: DecorationImage(
-                image: AssetImage(categories[widget.index]['categoryPath']),
-                fit: BoxFit.cover,
-              )),
+          decoration: kBoxDecorationAll.copyWith(
+            image: DecorationImage(
+              image: AssetImage(categories[widget.index]['categoryPath']),
+              fit: BoxFit.cover,
+            ),
+          ),
           margin: EdgeInsets.symmetric(horizontal: 10.0),
           width: 150.0,
           height: 150.0,
@@ -57,7 +58,7 @@ class _CategoriesState extends State<Categories> {
           color: Colors.grey.shade200,
           child: Text(
             categories[widget.index]['categoryName'],
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+            style: kTextStyleSmall
           ),
         ),
       )
