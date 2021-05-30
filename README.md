@@ -16,7 +16,6 @@
 ## Packages
 - Provider - https://pub.dev/packages/provider
 - rFlutter - https://pub.dev/packages/rflutter_alert
-- ListTileSwitch - https://pub.dev/packages/list_tile_switch
 - CarouselPro - https://pub.dev/packages/carousel_pro
 - Badges - https://pub.dev/packages/badges
 
