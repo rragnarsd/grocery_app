@@ -1,16 +1,25 @@
-# grocery_app
+# Farmers Market
 
-A new Flutter application.
+## About
+- Farmers Market App where you can buy fresh vegetables, fruits and drinks in the comfort of your home. 
+- :cherries::eggplant::pear::corn::tomato::banana::strawberry::sweet_potato::lemon::tangerine::green_apple::pineapple::watermelon::melon::grapes::peach:
 
-## Getting Started
+## Features
+- Authentication (register, login, logout). <em>(Not ready)</em>
+- Custom App Launcher. <em>(Not ready)</em>
+- Routing.
+- State Management (provider).
 
-This project is a starting point for a Flutter application.
+## Design
+- The images are from www.unsplash.com.
 
-A few resources to get you started if this is your first Flutter project:
+## Packages
+- Provider - https://pub.dev/packages/provider
+- rFlutter - https://pub.dev/packages/rflutter_alert
+- ListTileSwitch - https://pub.dev/packages/list_tile_switch
+- CarouselPro - https://pub.dev/packages/carousel_pro
+- Badges - https://pub.dev/packages/badges
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Live version
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://user-images.githubusercontent.com/44742460/120118287-37709880-c181-11eb-8f66-41ed39fa665e.mp4
