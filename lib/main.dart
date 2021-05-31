@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
@@ -8,10 +9,13 @@ import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/wishlist.dart';
 import 'package:grocery_app/widgets/categories_feeds.dart';
 import 'package:grocery_app/screens/product_details.dart';
+import 'package:grocery_app/widgets/toggle_button.dart';
 import 'package:provider/provider.dart';
 import 'screens/bottom_bar.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,7 +30,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Farmers Market',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity
