@@ -4,6 +4,7 @@ import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:grocery_app/provider/products.dart';
 import 'package:grocery_app/screens/cart.dart';
 import 'package:grocery_app/screens/feeds.dart';
+import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/wishlist.dart';
 import 'package:grocery_app/widgets/categories_feeds.dart';
 import 'package:grocery_app/screens/product_details.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity
         ),
-        initialRoute: '/BottomBarScreen',
+        initialRoute: '/AuthScreen',
         routes: {
           '/BottomBarScreen': (context) => BottomBarScreen(),
           '/CartScreen': (context) => CartScreen(),
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           '/ProductDetails': (context) => ProductDetailsScreen(),
           '/FeedsScreen': (context) => FeedsScreen(),
           '/CategoriesFeedsScreen': (context) => CategoriesFeedsScreen(),
+          '/AuthScreen': (context) => AuthScreen(),
         },
       ),
     );

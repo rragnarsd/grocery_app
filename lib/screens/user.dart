@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants.dart';
-import 'package:list_tile_switch/list_tile_switch.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/UserScreen';
@@ -146,10 +145,8 @@ class _UserScreenState extends State<UserScreen> {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 0),
-                    UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 1),
-                    UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 2),
-                    UserListTile(title: 'Jakob', subTitle: 'Yolo', index: 3),
+                    UserListTile(title: 'Jakob', subTitle: 'jakob@jakob.is', index: 0),
+                    UserListTile(title: 'Mobile', subTitle: '666-6666', index: 1),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
@@ -160,19 +157,6 @@ class _UserScreenState extends State<UserScreen> {
                     Divider(
                       thickness: 1,
                       color: Colors.grey,
-                    ),
-                    ListTileSwitch(
-                      value: _value,
-                      leading: Icon(Icons.night_shelter),
-                      onChanged: (value) {
-                        setState(() {
-                          _value = value;
-                        });
-                      },
-                      visualDensity: VisualDensity.comfortable,
-                      switchType: SwitchType.cupertino,
-                      switchActiveColor: Colors.indigo,
-                      title: Text('Dark Theme'),
                     ),
                     UserListTile(title: 'Logout', subTitle: '', index: 4),
                   ]),
