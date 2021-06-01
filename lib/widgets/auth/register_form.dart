@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/services/global_methods.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -15,6 +14,15 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
+  bool _isLoading = false;
+  final String header;
+  final String subHeader;
+  final String key;
+  final String btnText;
+  final Function function;
+
+  _RegisterFormState(
+      {this.header, this.subHeader, this.key, this.btnText, this.function});
 
   String validateEmail(value) {
     if (value == null || value.isEmpty) {
@@ -36,17 +44,26 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void _register() async {
     try {
+      setState(() {
+        _isLoading = true;
+      });
       if (_registerFormKey.currentState.validate()) {
         final User user = (await _auth.createUserWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text))
+                email: _emailController.text,
+                password: _passwordController.text))
             .user;
         if (user != null) {
           Navigator.pushNamed(context, '/BottomBarScreen');
-          _globalMethods.onSuccessAlert(context, 'Registration Successful', '${_auth.currentUser.email}');
+          _globalMethods.onSuccessAlert(
+              context, 'Registration Successful', '${_auth.currentUser.email}');
         }
       }
     } catch (error) {
       _globalMethods.onAuthAlert(context, error.message);
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -117,27 +134,32 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
               ),
               validator: validatePassword,
+              obscureText: _obscureText,
             ),
             SizedBox(
               height: 20,
             ),
-            Container(
-              width: double.infinity,
-              height: 40.0,
-              child: ElevatedButton(
-                child: Text(
-                  'Sign in',
-                  style: TextStyle(fontSize: 18.0),
-                ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+            _isLoading
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),
+                  )
+                : Container(
+                    width: double.infinity,
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        'Register',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        padding: EdgeInsets.all(10.0),
+                      ),
+                      onPressed: _register,
+                    ),
                   ),
-                  padding: EdgeInsets.all(10.0),
-                ),
-                onPressed: _register,
-              ),
-            ),
             SizedBox(
               height: 20.0,
             ),

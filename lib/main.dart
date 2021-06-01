@@ -9,7 +9,6 @@ import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/wishlist.dart';
 import 'package:grocery_app/widgets/categories_feeds.dart';
 import 'package:grocery_app/screens/product_details.dart';
-import 'package:grocery_app/widgets/toggle_button.dart';
 import 'package:provider/provider.dart';
 import 'screens/bottom_bar.dart';
 
