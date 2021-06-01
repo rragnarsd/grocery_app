@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/services/global_methods.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -10,6 +11,7 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _auth = FirebaseAuth.instance;
   GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
+  GlobalMethods _globalMethods = GlobalMethods();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
@@ -40,24 +42,11 @@ class _RegisterFormState extends State<RegisterForm> {
             .user;
         if (user != null) {
           Navigator.pushNamed(context, '/BottomBarScreen');
+          _globalMethods.onSuccessAlert(context, 'Registration Successful', '${_auth.currentUser.email}');
         }
-        Alert(
-            context: context,
-            title: "${_auth.currentUser.email}",
-            desc: "Successfully Registered",
-            style: AlertStyle(isCloseButton: false),
-            buttons: [
-              DialogButton(
-                color: Colors.white,
-                child: Text(
-                  'Continue',
-                ),
-                onPressed: () => Navigator.pop(context),
-              )
-            ]).show();
       }
     } catch (error) {
-      print('Error, $error');
+      _globalMethods.onAuthAlert(context, error.message);
     }
   }
 

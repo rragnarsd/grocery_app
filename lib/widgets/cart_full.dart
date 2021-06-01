@@ -42,7 +42,8 @@ class _CartFullState extends State<CartFull> {
                 decoration: kBoxDecorationOnly.copyWith(
                     image: DecorationImage(
                         image: NetworkImage(cartAttr.imgUrl),
-                        fit: BoxFit.fill),
+                        fit: BoxFit.fill,
+                    ),
                 ),
               ),
               Flexible(
@@ -66,10 +67,11 @@ class _CartFullState extends State<CartFull> {
                               child: Icon(Icons.delete),
                             ),
                             onTap: () {
-                              globalMethods.onAlertButtonsPressed(
-                                  context,
+                              globalMethods.onWarningAlert(
+                                  context, 'This item will be removed',
                                   () => cartProvider
-                                      .removeItemFromCart(widget.productId));
+                                      .removeItemFromCart(widget.productId),
+                              );
                             },
                           )
                         ],
@@ -81,7 +83,8 @@ class _CartFullState extends State<CartFull> {
                             width: 5,
                           ),
                           Text('\$${cartAttr.price.toStringAsFixed(2)}',
-                              style: kTextStyleXSmall),
+                              style: kTextStyleXSmall,
+                          ),
                         ],
                       ),
                       Row(
@@ -92,7 +95,8 @@ class _CartFullState extends State<CartFull> {
                           ),
                           Text('\$${total.toStringAsFixed(2)}',
                               style: kTextStyleXSmall.copyWith(
-                                  color: Colors.indigo),
+                                  color: Colors.indigo,
+                              ),
                           ),
                         ],
                       ),
@@ -146,7 +150,8 @@ class _CartFullState extends State<CartFull> {
                                   widget.productId,
                                   cartAttr.price,
                                   cartAttr.name,
-                                  cartAttr.imgUrl);
+                                  cartAttr.imgUrl,
+                              );
                             },
                           ),
                         ],
