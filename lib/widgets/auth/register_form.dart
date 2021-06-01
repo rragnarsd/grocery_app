@@ -52,13 +52,13 @@ class _RegisterFormState extends State<RegisterForm> {
       if (_registerFormKey.currentState.validate()) {
         final User user = (await _auth.createUserWithEmailAndPassword(
                 email: _emailController.text,
-                password: _passwordController.text))
-            .user;
+                password: _passwordController.text)).user;
         if (user != null) {
           _globalMethods.onSuccessAlert(
-              context, 'Registration Successful', '${_auth.currentUser.email}');
+              context, 'Registration Successful', '${_auth.currentUser.email}', () => Navigator.of(context));
         }
       }
+
     } catch (error) {
       _globalMethods.onAuthAlert(context, error.message);
     } finally {

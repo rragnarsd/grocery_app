@@ -15,7 +15,7 @@ class _SignInFormState extends State<SignInForm> {
   GlobalMethods _globalMethods = GlobalMethods();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _obscureText = false;
+  bool _obscureText = true;
   bool _isLoading = false;
   final String header;
   final String subHeader;
@@ -44,7 +44,7 @@ class _SignInFormState extends State<SignInForm> {
       return null;
   }
 
-/*  void _signIn() async {
+  void _signIn() async {
     final isValid = _signInFormKey.currentState.validate();
     if (isValid) {
       setState(() {
@@ -58,8 +58,6 @@ class _SignInFormState extends State<SignInForm> {
                 password: _passwordController.text)
             .then((value) =>
                 Navigator.canPop(context) ? Navigator.pop(context) : null);
-        _globalMethods.onSuccessAlert(
-            context, 'Sign in Successful', '${_auth.currentUser.email}');
       } catch (error) {
         _globalMethods.onAuthAlert(context, error.message);
       } finally {
@@ -67,28 +65,6 @@ class _SignInFormState extends State<SignInForm> {
           _isLoading = false;
         });
       }
-    }
-  }*/
-
-  void _signIn() async {
-    try {
-      if (_signInFormKey.currentState.validate()) {
-        final User user = (await _auth.signInWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text))
-            .user;
-        if (user != null) {
-           Navigator.pushNamed(context, '/BottomBarScreen');
-          _globalMethods.onSuccessAlert(
-              context, 'Sign in Successful', '${_auth.currentUser.email}');
-        }
-      }
-    } catch (error) {
-      _globalMethods.onAuthAlert(context, error.message);
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 
@@ -102,13 +78,21 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Welcome back!',
-          style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)),
+      Text(
+        'Welcome back!',
+        style: kTextStyleLarge.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
+      ),
       SizedBox(
         height: 10,
       ),
-      Text('Sign in to your account',
-          style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)),
+      Text(
+        'Sign in to your account',
+        style: kTextStyleMedium.copyWith(
+          fontWeight: FontWeight.w400,
+        ),
+      ),
       SizedBox(
         height: 20,
       ),
@@ -235,9 +219,10 @@ class _SignInFormState extends State<SignInForm> {
                     onPressed: () {},
                     child: Text('Google'),
                     style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
                   ),
                 ),
               ],
