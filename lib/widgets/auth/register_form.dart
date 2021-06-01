@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/services/global_methods.dart';
 
+import '../../constants.dart';
+
 class RegisterForm extends StatefulWidget {
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -77,17 +79,13 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        'Welcome!',
-        style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
-      ),
+      Text('Welcome!',
+          style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)),
       SizedBox(
         height: 10,
       ),
-      Text(
-        'Create Account',
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
-      ),
+      Text('Create Account',
+          style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)),
       SizedBox(
         height: 20,
       ),
@@ -98,10 +96,9 @@ class _RegisterFormState extends State<RegisterForm> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.black54),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.indigo),
                   borderRadius: BorderRadius.circular(10.0),
@@ -114,7 +111,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -127,7 +124,6 @@ class _RegisterFormState extends State<RegisterForm> {
                   ),
                 ),
                 labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.black54),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.indigo),
                   borderRadius: BorderRadius.circular(10.0),

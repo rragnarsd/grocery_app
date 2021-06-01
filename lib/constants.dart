@@ -25,7 +25,8 @@ const kBoxDecorationAll = BoxDecoration(
       Radius.circular(10.0),
     ),
     color: Colors.grey,
-    image: null
+    image: null,
+    boxShadow: null,
 );
 
 const kBoxDecorationOnly = BoxDecoration(
@@ -35,4 +36,13 @@ const kBoxDecorationOnly = BoxDecoration(
     ),
     color: Colors.grey,
     image: null
+);
+
+const kInputDecoration = InputDecoration(
+  prefixIcon: null,
+  suffixIcon: null,
+  hintText: null,
+  labelText: '',
+  labelStyle: TextStyle(color: Colors.black54),
+  border: OutlineInputBorder(),
 );

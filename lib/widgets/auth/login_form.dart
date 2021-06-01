@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/services/global_methods.dart';
 
+import '../../constants.dart';
+
 class SignInForm extends StatefulWidget {
   @override
   _SignInFormState createState() => _SignInFormState();
@@ -76,15 +78,13 @@ class _SignInFormState extends State<SignInForm> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         'Welcome back!',
-        style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
-      ),
+          style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)),
       SizedBox(
         height: 10,
       ),
       Text(
         'Sign in to your account',
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
-      ),
+          style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)),
       SizedBox(
         height: 20,
       ),
@@ -95,10 +95,9 @@ class _SignInFormState extends State<SignInForm> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.black54),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.indigo),
                   borderRadius: BorderRadius.circular(10.0),
@@ -111,7 +110,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
             TextFormField(
               controller: _passwordController,
-              decoration: InputDecoration(
+              decoration: kInputDecoration.copyWith(
                 prefixIcon: Icon(Icons.lock),
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -124,7 +123,6 @@ class _SignInFormState extends State<SignInForm> {
                   ),
                 ),
                 labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.black54),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.indigo),
                   borderRadius: BorderRadius.circular(10.0),

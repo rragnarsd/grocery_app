@@ -5,6 +5,8 @@ import 'package:grocery_app/widgets/feed_products.dart';
 import 'package:grocery_app/widgets/searchby.dart';
 import 'package:provider/provider.dart';
 
+import '../constants.dart';
+
 class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -80,11 +82,8 @@ class _SearchScreenState extends State<SearchScreen> {
               stackPaddingTop: 30,
               title: null,
               stackChild: Container(
-                decoration: BoxDecoration(
+                decoration: kBoxDecorationAll.copyWith(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -98,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   controller: _searchTextController,
                   minLines: 1,
                   focusNode: _node,
-                  decoration: InputDecoration(
+                  decoration: kInputDecoration.copyWith(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
@@ -152,10 +151,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       Text(
                         'No results found',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)
                       ),
                     ],
                   )
