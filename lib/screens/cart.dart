@@ -23,7 +23,7 @@ class CartScreen extends StatelessWidget {
                 IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      globalMethods.onWarningAlert(context, 'These items will be removed', () => cartProvider.clearCart());
+                      globalMethods.onWarningAlert(context, 'These items will be deleted', 'Cancel', 'Delete', () => cartProvider.clearCart());
                     })
               ],
             ),

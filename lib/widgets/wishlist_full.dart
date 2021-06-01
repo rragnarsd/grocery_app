@@ -69,7 +69,7 @@ class _WishListFullState extends State<WishListFull> {
                           ),
                           onTap: () => {
                             globalMethods.onWarningAlert(
-                                context, 'This item will be removed from your wishlist',
+                                context, 'This item will be removed from your wishlist', 'Cancel', 'Delete',
                                 () => favProvider
                                     .removeItemFromFav(widget.productId))
                           },

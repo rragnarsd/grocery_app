@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants.dart';
+import 'package:grocery_app/services/global_methods.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/UserScreen';
@@ -24,6 +26,7 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalMethods globalMethods = GlobalMethods();
     return Scaffold(
       body: Stack(children: [
         CustomScrollView(
@@ -101,10 +104,7 @@ class _UserScreenState extends State<UserScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        'User Bag',
-                        style: kTextStyleMedium
-                      ),
+                      child: Text('User Bag', style: kTextStyleMedium),
                     ),
                     Divider(
                       thickness: 1,
@@ -129,36 +129,51 @@ class _UserScreenState extends State<UserScreen> {
                           title: Text('Cart'),
                           trailing: Icon(Icons.chevron_right),
                           leading: Icon(Icons.shopping_cart),
-                          onTap: () => Navigator.of(context)
-                              .pushNamed('/CartScreen'),
+                          onTap: () =>
+                              Navigator.of(context).pushNamed('/CartScreen'),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        'Information',
-                        style: kTextStyleMedium
-                      ),
+                      child: Text('Information', style: kTextStyleMedium),
                     ),
                     Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    UserListTile(title: 'Jakob', subTitle: 'jakob@jakob.is', index: 0),
-                    UserListTile(title: 'Mobile', subTitle: '666-6666', index: 1),
+                    UserListTile(
+                        title: 'Jakob', subTitle: 'jakob@jakob.is', index: 0),
+                    UserListTile(
+                        title: 'Mobile', subTitle: '666-6666', index: 1),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        'Settings',
-                        style: kTextStyleMedium
-                        ),
-                      ),
+                      child: Text('Settings', style: kTextStyleMedium),
+                    ),
                     Divider(
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    UserListTile(title: 'Logout', subTitle: '', index: 4),
+                    Material(
+                      child: InkWell(
+                        splashColor: Theme.of(context).splashColor,
+                        child: ListTile(
+                          title: Text('Sign out'),
+                          subtitle: Text(''),
+                          leading: Icon(Icons.logout),
+                          onTap: () async {
+                            globalMethods.onWarningAlert(
+                                context,
+                                'You will be signed out',
+                                'Cancel',
+                                'Continue', () async {
+                           await FirebaseAuth.instance.signOut();
+                              Navigator.canPop(context) ? Navigator.pop(context) : null;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
                   ]),
             ),
           ],
@@ -213,8 +228,9 @@ class UserListTile extends StatelessWidget {
   final String title;
   final String subTitle;
   int index;
+  final Function function;
 
-  UserListTile({this.title, this.subTitle, this.index});
+  UserListTile({this.title, this.subTitle, this.index, this.function});
 
   List<IconData> _userTileIcons = [
     Icons.email,
@@ -233,7 +249,7 @@ class UserListTile extends StatelessWidget {
           title: Text(title),
           subtitle: Text(subTitle),
           leading: Icon(_userTileIcons[index]),
-          onTap: () {},
+          onTap: function,
         ),
       ),
     );

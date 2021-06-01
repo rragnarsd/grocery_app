@@ -68,7 +68,7 @@ class _CartFullState extends State<CartFull> {
                             ),
                             onTap: () {
                               globalMethods.onWarningAlert(
-                                  context, 'This item will be removed',
+                                  context, 'This item will be removed', 'Are you sure?', '',
                                   () => cartProvider
                                       .removeItemFromCart(widget.productId),
                               );

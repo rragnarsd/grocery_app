@@ -44,24 +44,51 @@ class _SignInFormState extends State<SignInForm> {
       return null;
   }
 
-  void _signIn() async {
-    try {
+/*  void _signIn() async {
+    final isValid = _signInFormKey.currentState.validate();
+    if (isValid) {
       setState(() {
         _isLoading = true;
       });
+      _signInFormKey.currentState.save();
+      try {
+        await _auth
+            .signInWithEmailAndPassword(
+                email: _emailController.text,
+                password: _passwordController.text)
+            .then((value) =>
+                Navigator.canPop(context) ? Navigator.pop(context) : null);
+        _globalMethods.onSuccessAlert(
+            context, 'Sign in Successful', '${_auth.currentUser.email}');
+      } catch (error) {
+        _globalMethods.onAuthAlert(context, error.message);
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }*/
+
+  void _signIn() async {
+    try {
       if (_signInFormKey.currentState.validate()) {
         final User user = (await _auth.signInWithEmailAndPassword(
-            email: _emailController.text,
-            password: _passwordController.text))
+                email: _emailController.text,
+                password: _passwordController.text))
             .user;
         if (user != null) {
-          Navigator.pushNamed(context, '/BottomBarScreen');
+           Navigator.pushNamed(context, '/BottomBarScreen');
           _globalMethods.onSuccessAlert(
               context, 'Sign in Successful', '${_auth.currentUser.email}');
         }
       }
     } catch (error) {
       _globalMethods.onAuthAlert(context, error.message);
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -72,18 +99,15 @@ class _SignInFormState extends State<SignInForm> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        'Welcome back!',
+      Text('Welcome back!',
           style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)),
       SizedBox(
         height: 10,
       ),
-      Text(
-        'Sign in to your account',
+      Text('Sign in to your account',
           style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)),
       SizedBox(
         height: 20,
@@ -134,25 +158,27 @@ class _SignInFormState extends State<SignInForm> {
             SizedBox(
               height: 20,
             ),
-           _isLoading ? CircularProgressIndicator(
-             valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),
-           ) : Container(
-              width: double.infinity,
-              height: 40.0,
-              child: ElevatedButton(
-                child: Text(
-                  'Sign in',
-                  style: TextStyle(fontSize: 18.0),
-                ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+            _isLoading
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo),
+                  )
+                : Container(
+                    width: double.infinity,
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        padding: EdgeInsets.all(10.0),
+                      ),
+                      onPressed: _signIn,
+                    ),
                   ),
-                  padding: EdgeInsets.all(10.0),
-                ),
-                onPressed: _signIn,
-              ),
-            ),
             SizedBox(
               height: 20.0,
             ),

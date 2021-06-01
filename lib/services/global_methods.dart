@@ -2,7 +2,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/material.dart';
 
 class GlobalMethods {
-  void onWarningAlert(BuildContext context, String desc, Function function) {
+  void onWarningAlert(BuildContext context, String desc, String btnTextOne, String btnTextTwo, Function function) {
     Alert(
       context: context,
       type: AlertType.warning,
@@ -11,7 +11,8 @@ class GlobalMethods {
       buttons: [
         DialogButton(
             child: Text(
-              "Cancel",
+              btnTextOne,
+              /*"Cancel",*/
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             onPressed: () => Navigator.pop(context),
@@ -20,7 +21,8 @@ class GlobalMethods {
         ),
         DialogButton(
           child: Text(
-            "Delete",
+            btnTextTwo,
+           /* "Delete",*/
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {
@@ -39,7 +41,7 @@ class GlobalMethods {
       type: AlertType.success,
       title: title,
       desc: desc,
-      buttons: [
+    /*  buttons: [
         DialogButton(
             child: Text(
               "OK",
@@ -47,7 +49,7 @@ class GlobalMethods {
             ),
             onPressed: () => Navigator.pop(context),
         ),
-      ],
+      ],*/
     ).show();
   }
 

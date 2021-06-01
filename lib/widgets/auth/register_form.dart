@@ -55,7 +55,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 password: _passwordController.text))
             .user;
         if (user != null) {
-          Navigator.pushNamed(context, '/BottomBarScreen');
           _globalMethods.onSuccessAlert(
               context, 'Registration Successful', '${_auth.currentUser.email}');
         }
