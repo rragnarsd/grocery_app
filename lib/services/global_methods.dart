@@ -35,13 +35,13 @@ class GlobalMethods {
     ).show();
   }
 
-  void onSuccessAlert(BuildContext context, String title, String desc, Function function) {
+  void onSuccessAlert(BuildContext context, String title, String desc, /*Function function*/) {
     Alert(
       context: context,
       type: AlertType.success,
       title: title,
       desc: desc,
-      buttons: [
+    /*  buttons: [
         DialogButton(
             child: Text(
               "OK",
@@ -51,9 +51,9 @@ class GlobalMethods {
               function();
               Navigator.pop(context);
             },
-            /*onPressed: () => Navigator.pop(context),*/
+            *//*onPressed: () => Navigator.pop(context),*//*
         ),
-      ],
+      ],*/
     ).show();
   }
 

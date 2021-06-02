@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/bottom_bar.dart';
 import 'package:grocery_app/services/global_methods.dart';
 
 import '../../constants.dart';
@@ -55,7 +56,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 password: _passwordController.text)).user;
         if (user != null) {
           _globalMethods.onSuccessAlert(
-              context, 'Registration Successful', '${_auth.currentUser.email}', () => Navigator.of(context));
+              context, 'Registration Successful', '${_auth.currentUser.email}');
         }
       }
 

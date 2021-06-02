@@ -4,6 +4,7 @@ import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/bottom_bar.dart';
 
 class AuthState extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

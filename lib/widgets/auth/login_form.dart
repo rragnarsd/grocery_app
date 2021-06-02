@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grocery_app/screens/bottom_bar.dart';
 import 'package:grocery_app/services/global_methods.dart';
 
 import '../../constants.dart';
@@ -44,6 +45,7 @@ class _SignInFormState extends State<SignInForm> {
       return null;
   }
 
+
   void _signIn() async {
     final isValid = _signInFormKey.currentState.validate();
     if (isValid) {
@@ -57,7 +59,9 @@ class _SignInFormState extends State<SignInForm> {
                 email: _emailController.text,
                 password: _passwordController.text)
             .then((value) =>
-                Navigator.canPop(context) ? Navigator.pop(context) : null);
+                Navigator.canPop(context) ? Navigator.pop(context) : null
+        );
+       /* _globalMethods.onSuccessAlert(context, 'Successful', '${_auth.currentUser.email}');*/
       } catch (error) {
         _globalMethods.onAuthAlert(context, error.message);
       } finally {
