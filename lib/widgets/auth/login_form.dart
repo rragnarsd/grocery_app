@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery_app/widgets/alert_dialogs.dart';
 
 import '../../constants.dart';
@@ -44,9 +45,9 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void _submit() async {
-      setState(() {
-        _isLoading = true;
-      });
+    setState(() {
+      _isLoading = true;
+    });
     try {
       await _auth.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
@@ -59,6 +60,19 @@ class _SignInFormState extends State<SignInForm> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> _googleSignIn() async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+       final authResult = await _auth.signInWithCredential(GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken),
+        );
+      }
     }
   }
 
@@ -210,7 +224,7 @@ class _SignInFormState extends State<SignInForm> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _googleSignIn,
                     child: Text('Google'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

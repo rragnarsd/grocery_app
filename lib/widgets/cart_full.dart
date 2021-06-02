@@ -31,7 +31,8 @@ class _CartFullState extends State<CartFull> {
           height: 140.0,
           margin: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderRadius: BorderRadius.all(Radius.circular(10.0),
+            ),
             color: Colors.grey.shade200,
           ),
           child: Row(
