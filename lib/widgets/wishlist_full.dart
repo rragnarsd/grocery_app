@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/models/fav_attr.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:grocery_app/services/global_methods.dart';
 
 import '../constants.dart';
+import 'alert_dialogs.dart';
 
 class WishListFull extends StatefulWidget {
   final String productId;
@@ -19,7 +19,6 @@ class _WishListFullState extends State<WishListFull> {
   Widget build(BuildContext context) {
     final favAttr = Provider.of<FavAttr>(context);
     final favProvider = Provider.of<FavProvider>(context);
-    GlobalMethods globalMethods = GlobalMethods();
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Container(
@@ -50,16 +49,17 @@ class _WishListFullState extends State<WishListFull> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(favAttr.name,
-                                style: kTextStyleSmall.copyWith(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w700),
+                            Text(
+                              favAttr.name,
+                              style: kTextStyleSmall.copyWith(
+                                  fontSize: 18.0, fontWeight: FontWeight.w700),
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
-                            Text('\$${favAttr.price.toStringAsFixed(2)}',
-                                style: kTextStyleXSmall,
+                            Text(
+                              '\$${favAttr.price.toStringAsFixed(2)}',
+                              style: kTextStyleXSmall,
                             )
                           ],
                         ),
@@ -67,11 +67,17 @@ class _WishListFullState extends State<WishListFull> {
                           child: Container(
                             child: Icon(Icons.delete),
                           ),
-                          onTap: () => {
-                            globalMethods.onWarningAlert(
-                                context, 'This item will be removed from your wishlist', 'Cancel', 'Delete',
-                                () => favProvider
-                                    .removeItemFromFav(widget.productId))
+                          onTap: () async {
+                            final continueRequest = await showAlertDialog(
+                              context,
+                              title: 'Are you sure?',
+                              content: 'This item will be removed!',
+                              cancelActionText: 'Cancel',
+                              defaultActionText: 'Continue',
+                            );
+                            if (continueRequest == true) {
+                              favProvider.removeItemFromFav(widget.productId);
+                            }
                           },
                         )
                       ],

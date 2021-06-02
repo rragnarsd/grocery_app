@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/services/global_methods.dart';
+import 'package:grocery_app/widgets/alert_dialogs.dart';
 import 'package:grocery_app/widgets/cart_full.dart';
 import 'package:grocery_app/widgets/cart_wishlist_empty.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,6 @@ class CartScreen extends StatelessWidget {
   static const routeName = '/CartScreen';
   @override
   Widget build(BuildContext context) {
-    GlobalMethods globalMethods = GlobalMethods();
     final cartProvider = Provider.of<CartProvider>(context);
 
     return cartProvider.getCartItems.isEmpty
@@ -22,8 +21,17 @@ class CartScreen extends StatelessWidget {
               actions: [
                 IconButton(
                     icon: Icon(Icons.delete),
-                    onPressed: () {
-                      globalMethods.onWarningAlert(context, 'These items will be deleted', 'Cancel', 'Delete', () => cartProvider.clearCart());
+                    onPressed: () async {
+                      final continueRequest = await showAlertDialog(
+                        context,
+                        title: 'Are you sure?',
+                        content: 'These items will be removed!',
+                        defaultActionText: 'Continue',
+                        cancelActionText: 'Cancel',
+                      );
+                      if (continueRequest == true) {
+                        cartProvider.clearCart();
+                      }
                     })
               ],
             ),

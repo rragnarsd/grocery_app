@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants.dart';
-import 'package:grocery_app/services/global_methods.dart';
+import 'package:grocery_app/widgets/alert_dialogs.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/UserScreen';
@@ -26,7 +26,6 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    GlobalMethods globalMethods = GlobalMethods();
     return Scaffold(
       body: Stack(children: [
         CustomScrollView(
@@ -162,14 +161,15 @@ class _UserScreenState extends State<UserScreen> {
                           subtitle: Text(''),
                           leading: Icon(Icons.logout),
                           onTap: () async {
-                            globalMethods.onWarningAlert(
-                                context,
-                                'You will be signed out',
-                                'Cancel',
-                                'Continue', () async {
-                           await FirebaseAuth.instance.signOut();
-                              Navigator.canPop(context) ? Navigator.pop(context) : null;
-                            });
+                            final didRequestSignOut = await
+                            showAlertDialog(context,
+                                title: 'Logout',
+                                content:
+                                    'Are you sure that you want to logout?',
+                                defaultActionText: 'Logout',
+                                cancelActionText: 'Cancel'); if (didRequestSignOut == true) {
+                                  FirebaseAuth.instance.signOut();
+                            }
                           },
                         ),
                       ),

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/bottom_bar.dart';
-import 'package:grocery_app/services/global_methods.dart';
+import 'package:grocery_app/widgets/alert_dialogs.dart';
 
 import '../../constants.dart';
 
@@ -13,7 +12,6 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final _auth = FirebaseAuth.instance;
   GlobalKey<FormState> _signInFormKey = GlobalKey<FormState>();
-  GlobalMethods _globalMethods = GlobalMethods();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
@@ -45,30 +43,22 @@ class _SignInFormState extends State<SignInForm> {
       return null;
   }
 
-
-  void _signIn() async {
-    final isValid = _signInFormKey.currentState.validate();
-    if (isValid) {
+  void _submit() async {
       setState(() {
         _isLoading = true;
       });
-      _signInFormKey.currentState.save();
-      try {
-        await _auth
-            .signInWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text)
-            .then((value) =>
-                Navigator.canPop(context) ? Navigator.pop(context) : null
-        );
-       /* _globalMethods.onSuccessAlert(context, 'Successful', '${_auth.currentUser.email}');*/
-      } catch (error) {
-        _globalMethods.onAuthAlert(context, error.message);
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+    } catch (error) {
+      showAlertDialog(context,
+          title: 'Signed in failed',
+          content: error.message,
+          defaultActionText: 'Ok');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -164,7 +154,7 @@ class _SignInFormState extends State<SignInForm> {
                         ),
                         padding: EdgeInsets.all(10.0),
                       ),
-                      onPressed: _signIn,
+                      onPressed: _submit,
                     ),
                   ),
             SizedBox(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/cart_attr.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
-import 'package:grocery_app/services/global_methods.dart';
 import 'package:grocery_app/screens/product_details.dart';
+import 'package:grocery_app/widgets/alert_dialogs.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -19,7 +19,6 @@ class CartFull extends StatefulWidget {
 class _CartFullState extends State<CartFull> {
   @override
   Widget build(BuildContext context) {
-    GlobalMethods globalMethods = GlobalMethods();
     final cartAttr = Provider.of<CartAttr>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     double total = cartAttr.price * cartAttr.qty;
@@ -40,10 +39,10 @@ class _CartFullState extends State<CartFull> {
               Container(
                 width: 130.0,
                 decoration: kBoxDecorationOnly.copyWith(
-                    image: DecorationImage(
-                        image: NetworkImage(cartAttr.imgUrl),
-                        fit: BoxFit.fill,
-                    ),
+                  image: DecorationImage(
+                    image: NetworkImage(cartAttr.imgUrl),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               Flexible(
@@ -66,12 +65,18 @@ class _CartFullState extends State<CartFull> {
                             child: Container(
                               child: Icon(Icons.delete),
                             ),
-                            onTap: () {
-                              globalMethods.onWarningAlert(
-                                  context, 'This item will be removed', 'Are you sure?', '',
-                                  () => cartProvider
-                                      .removeItemFromCart(widget.productId),
+                            onTap: () async {
+                              final continueRequest = await showAlertDialog(
+                                context,
+                                title: 'Are you sure?',
+                                content: 'This item will be removed!',
+                                defaultActionText: 'Continue',
+                                cancelActionText: 'Cancel',
                               );
+                              if (continueRequest == true) {
+                                cartProvider
+                                    .removeItemFromCart(widget.productId);
+                              }
                             },
                           )
                         ],
@@ -82,8 +87,9 @@ class _CartFullState extends State<CartFull> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text('\$${cartAttr.price.toStringAsFixed(2)}',
-                              style: kTextStyleXSmall,
+                          Text(
+                            '\$${cartAttr.price.toStringAsFixed(2)}',
+                            style: kTextStyleXSmall,
                           ),
                         ],
                       ),
@@ -93,10 +99,11 @@ class _CartFullState extends State<CartFull> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text('\$${total.toStringAsFixed(2)}',
-                              style: kTextStyleXSmall.copyWith(
-                                  color: Colors.indigo,
-                              ),
+                          Text(
+                            '\$${total.toStringAsFixed(2)}',
+                            style: kTextStyleXSmall.copyWith(
+                              color: Colors.indigo,
+                            ),
                           ),
                         ],
                       ),
@@ -147,10 +154,10 @@ class _CartFullState extends State<CartFull> {
                             ),
                             onTap: () {
                               cartProvider.addItemsToCart(
-                                  widget.productId,
-                                  cartAttr.price,
-                                  cartAttr.name,
-                                  cartAttr.imgUrl,
+                                widget.productId,
+                                cartAttr.price,
+                                cartAttr.name,
+                                cartAttr.imgUrl,
                               );
                             },
                           ),

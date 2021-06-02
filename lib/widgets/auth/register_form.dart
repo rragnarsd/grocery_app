@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grocery_app/screens/bottom_bar.dart';
-import 'package:grocery_app/services/global_methods.dart';
 
 import '../../constants.dart';
+import '../alert_dialogs.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -13,7 +12,6 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _auth = FirebaseAuth.instance;
   GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
-  GlobalMethods _globalMethods = GlobalMethods();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
@@ -45,29 +43,23 @@ class _RegisterFormState extends State<RegisterForm> {
       return null;
   }
 
-  void _register() async {
+void _submit() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
-      setState(() {
-        _isLoading = true;
-      });
-      if (_registerFormKey.currentState.validate()) {
-        final User user = (await _auth.createUserWithEmailAndPassword(
-                email: _emailController.text,
-                password: _passwordController.text)).user;
-        if (user != null) {
-          _globalMethods.onSuccessAlert(
-              context, 'Registration Successful', '${_auth.currentUser.email}');
-        }
-      }
-
+      await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
     } catch (error) {
-      _globalMethods.onAuthAlert(context, error.message);
+      showAlertDialog(context,
+          title: 'Register failed',
+          content: error.message,
+          defaultActionText: 'Ok');
     } finally {
       setState(() {
         _isLoading = false;
       });
     }
-  }
+}
 
   @override
   void dispose() {
@@ -153,7 +145,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         ),
                         padding: EdgeInsets.all(10.0),
                       ),
-                      onPressed: _register,
+                      onPressed: _submit,
                     ),
                   ),
             SizedBox(
