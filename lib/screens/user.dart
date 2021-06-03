@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery_app/constants.dart';
 import 'package:grocery_app/widgets/alert_dialogs.dart';
 
@@ -168,7 +170,11 @@ class _UserScreenState extends State<UserScreen> {
                                     'Are you sure that you want to logout?',
                                 defaultActionText: 'Logout',
                                 cancelActionText: 'Cancel'); if (didRequestSignOut == true) {
-                                  FirebaseAuth.instance.signOut();
+                                  final googleSignIn = GoogleSignIn();
+                                  await googleSignIn.signOut();
+                                  final facebookLogin = FacebookLogin();
+                                  await facebookLogin.logOut();
+                                  await FirebaseAuth.instance.signOut();
                             }
                           },
                         ),

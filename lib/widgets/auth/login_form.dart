@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery_app/widgets/alert_dialogs.dart';
 
@@ -63,16 +65,55 @@ class _SignInFormState extends State<SignInForm> {
     }
   }
 
-  Future<void> _googleSignIn() async {
+  Future<void> _signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
-    final googleAccount = await googleSignIn.signIn();
-    if (googleAccount != null) {
-      final googleAuth = await googleAccount.authentication;
-      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
-       final authResult = await _auth.signInWithCredential(GoogleAuthProvider.credential(
-            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken),
+    final googleUser = await googleSignIn.signIn();
+    //Condition that will be true if the user has successfully completed the sign in process
+    if (googleUser != null) {
+      //Access the access token
+      final googleAuth = await googleUser.authentication;
+      /*if (googleAuth.accessToken != null && googleAuth.idToken != null) {*/
+      if (googleAuth.idToken != null) {
+        //Get the user credentials
+        final authResult = await _auth.signInWithCredential(
+          GoogleAuthProvider.credential(
+              accessToken: googleAuth.accessToken, idToken: googleAuth.idToken),
         );
+        return authResult.user;
+      } else {
+        throw FirebaseAuthException(
+            code: 'Error missing Google ID token',
+            message: 'Missing Google ID Token');
       }
+    } else {
+      throw FirebaseAuthException(
+          code: 'Error aborted by user', message: 'Sign in aborted by user');
+    }
+  }
+
+  Future<void> _signInWithFacebook() async {
+    final fb = FacebookLogin();
+    final response = await fb.logIn(permissions: [
+      FacebookPermission.publicProfile,
+      FacebookPermission.email
+    ]);
+    switch (response.status) {
+      case FacebookLoginStatus.success:
+        final accessToken = response.accessToken;
+        final userCredential = await _auth.signInWithCredential(
+          FacebookAuthProvider.credential(accessToken.token),
+        );
+        return userCredential.user;
+      case FacebookLoginStatus.cancel:
+        throw FirebaseAuthException(
+            code: 'Error aborted by user', message: 'Sign in aborted by user');
+      case FacebookLoginStatus.error:
+        throw FirebaseAuthException(
+          code: 'Error Facebook login failed',
+          message: response.error.developerMessage,
+        );
+      default:
+        throw UnimplementedError();
     }
   }
 
@@ -210,7 +251,7 @@ class _SignInFormState extends State<SignInForm> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: _signInWithFacebook,
                     child: Text('Facebook'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -224,7 +265,7 @@ class _SignInFormState extends State<SignInForm> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: _googleSignIn,
+                    onPressed: _signInWithGoogle,
                     child: Text('Google'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
