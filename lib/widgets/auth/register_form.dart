@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,9 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
   bool _isLoading = false;
+  String _emailAddress = '';
+  String _fullName = '';
+  int _phoneNumber;
   final String header;
   final String subHeader;
   final String key;
@@ -49,6 +53,15 @@ void _submit() async {
     });
     try {
       await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+      final User user = _auth.currentUser;
+      final _uid = user.uid;
+      FirebaseFirestore.instance.collection('users').doc('id').set({
+        'id': _uid,
+        'name': _fullName,
+        'email': _emailAddress,
+        'phoneNumber': _phoneNumber,
+        'imgUrl': '',
+      });
     } catch (error) {
       showAlertDialog(context,
           title: 'Register failed',

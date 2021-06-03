@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,10 @@ class _SignInFormState extends State<SignInForm> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true;
   bool _isLoading = false;
+  String _emailAddress = '';
+  String _fullName = '';
+  int _phoneNumber;
+  String url = '';
   final String header;
   final String subHeader;
   final String key;
