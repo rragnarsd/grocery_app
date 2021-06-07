@@ -59,7 +59,7 @@ void _submit() async {
         'id': _uid,
         'name': _fullName,
         'email': _emailAddress,
-        'phoneNumber': _phoneNumber,
+        /*'phoneNumber': _phoneNumber,*/
         'imgUrl': '',
       });
     } catch (error) {

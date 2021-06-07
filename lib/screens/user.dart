@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -13,16 +14,33 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  bool _value = false;
+ /* bool _value = false;*/
   ScrollController _scrollController;
+  final _auth = FirebaseAuth.instance;
+  final db = FirebaseFirestore.instance;
   var top = 0.0;
+  String _uid;
+  String _email = '';
 
   @override
   void initState() {
     super.initState();
+    getData();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {});
+    });
+  }
+
+
+  void getData() async {
+    User user = _auth.currentUser;
+    _uid = user.uid;
+    //Fetch data with Documentsnapshot
+    final DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc('id').get();
+    //Need to call setState to refresh the information
+    setState(() {
+      _email = user.email;
     });
   }
 
@@ -80,7 +98,7 @@ class _UserScreenState extends State<UserScreen> {
                                   width: 12,
                                 ),
                                 Text(
-                                  'Guest',
+                                  _email == null ? 'Guest' : _email,
                                 ),
                               ],
                             ),
@@ -144,9 +162,11 @@ class _UserScreenState extends State<UserScreen> {
                       color: Colors.grey,
                     ),
                     UserListTile(
-                        title: 'Jakob', subTitle: 'jakob@jakob.is', index: 0),
+                        title: 'Email', subTitle: '$_email', index: 0,
+                    ),
                     UserListTile(
-                        title: 'Mobile', subTitle: '666-6666', index: 1),
+                        title: 'Phone', subTitle: '666-6666', index: 1,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text('Settings', style: kTextStyleMedium),
@@ -241,7 +261,6 @@ class UserListTile extends StatelessWidget {
   List<IconData> _userTileIcons = [
     Icons.email,
     Icons.phone,
-    Icons.local_shipping,
     Icons.watch_later,
     Icons.exit_to_app
   ];
