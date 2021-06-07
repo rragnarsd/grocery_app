@@ -14,35 +14,20 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
- /* bool _value = false;*/
   ScrollController _scrollController;
   final _auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   var top = 0.0;
-  String _uid;
-  String _email = '';
 
   @override
   void initState() {
     super.initState();
-    getData();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {});
     });
   }
 
-
-  void getData() async {
-    User user = _auth.currentUser;
-    _uid = user.uid;
-    //Fetch data with Documentsnapshot
-    final DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc('id').get();
-    //Need to call setState to refresh the information
-    setState(() {
-      _email = user.email;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +79,8 @@ class _UserScreenState extends State<UserScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 12,
-                                ),
                                 Text(
-                                  _email == null ? 'Guest' : _email,
+                                 _auth.currentUser.email == null ? 'Guest' : _auth.currentUser.email
                                 ),
                               ],
                             ),
@@ -162,10 +144,10 @@ class _UserScreenState extends State<UserScreen> {
                       color: Colors.grey,
                     ),
                     UserListTile(
-                        title: 'Email', subTitle: '$_email', index: 0,
+                      title: 'Name', subTitle: '${_auth.currentUser.displayName == null ? 'Guest' : _auth.currentUser.displayName}', index: 1,
                     ),
                     UserListTile(
-                        title: 'Phone', subTitle: '666-6666', index: 1,
+                        title: 'Email', subTitle: '${ _auth.currentUser.email}', index: 0,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -204,48 +186,8 @@ class _UserScreenState extends State<UserScreen> {
             ),
           ],
         ),
-        _buildFab(),
+        /*_buildFab(),*/
       ]),
-    );
-  }
-
-  Widget _buildFab() {
-    //starting fab position
-    final double defaultTopMargin = 200.0 - 4.0;
-    //pixels from top where scaling should start
-    final double scaleStart = 160.0;
-    //pixels from top where scaling should end
-    final double scaleEnd = scaleStart / 2;
-
-    double top = defaultTopMargin;
-    double scale = 1.0;
-    if (_scrollController.hasClients) {
-      double offset = _scrollController.offset;
-      top -= offset;
-      if (offset < defaultTopMargin - scaleStart) {
-        //offset small => don't scale down
-        scale = 1.0;
-      } else if (offset < defaultTopMargin - scaleEnd) {
-        //offset between scaleStart and scaleEnd => scale down
-        scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
-      } else {
-        //offset passed scaleEnd => hide fab
-        scale = 0.0;
-      }
-    }
-    return Positioned(
-      top: top,
-      right: 16.0,
-      child: Transform(
-        transform: Matrix4.identity()..scale(scale),
-        alignment: Alignment.center,
-        child: FloatingActionButton(
-          backgroundColor: Colors.indigo,
-          heroTag: "btn1",
-          onPressed: () {},
-          child: Icon(Icons.camera_alt_outlined),
-        ),
-      ),
     );
   }
 }
@@ -260,7 +202,7 @@ class UserListTile extends StatelessWidget {
 
   List<IconData> _userTileIcons = [
     Icons.email,
-    Icons.phone,
+    Icons.person,
     Icons.watch_later,
     Icons.exit_to_app
   ];
