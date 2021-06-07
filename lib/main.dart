@@ -34,9 +34,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Farmers Market',
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          visualDensity: VisualDensity.adaptivePlatformDensity
-        ),
+            primarySwatch: Colors.indigo,
+            visualDensity: VisualDensity.adaptivePlatformDensity),
         initialRoute: '/AuthState',
         routes: {
           '/BottomBarScreen': (context) => BottomBarScreen(),

@@ -63,6 +63,7 @@ class _RegisterFormState extends State<RegisterForm> {
         'email': _emailAddress,
         'imgUrl': '',
       });
+      Navigator.of(context).pop();
     } catch (error) {
       showAlertDialog(context,
           title: 'Register failed',
@@ -89,6 +90,7 @@ class _RegisterFormState extends State<RegisterForm> {
           GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken),
         );
+        Navigator.of(context).pop();
         return authResult.user;
       } else {
         throw FirebaseAuthException(
@@ -113,6 +115,7 @@ class _RegisterFormState extends State<RegisterForm> {
         final userCredential = await _auth.signInWithCredential(
           FacebookAuthProvider.credential(accessToken.token),
         );
+        Navigator.of(context).pop();
         return userCredential.user;
       case FacebookLoginStatus.cancel:
         throw FirebaseAuthException(
@@ -139,166 +142,173 @@ class _RegisterFormState extends State<RegisterForm> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Welcome!',
-                      style: kTextStyleLarge.copyWith(
-                          fontWeight: FontWeight.w700)),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text('Create Account',
-                      style: kTextStyleMedium.copyWith(
-                          fontWeight: FontWeight.w400)),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-              Form(
-                key: _registerFormKey,
-                child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 150,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: kInputDecoration.copyWith(
-                        prefixIcon: Icon(Icons.email),
-                        labelText: 'Email',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.indigo),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      validator: validateEmail,
+                    Text('Welcome!',
+                        style: kTextStyleLarge.copyWith(
+                            fontWeight: FontWeight.w700)),
+                    SizedBox(
+                      height: 10,
                     ),
+                    Text('Create Account',
+                        style: kTextStyleMedium.copyWith(
+                            fontWeight: FontWeight.w400)),
                     SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      controller: _passwordController,
-                      decoration: kInputDecoration.copyWith(
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                          child: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                        ),
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.indigo),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      validator: validatePassword,
-                      obscureText: _obscureText,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _isLoading
-                        ? CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.indigo),
-                          )
-                        : Container(
-                            width: double.infinity,
-                            height: 40.0,
-                            child: ElevatedButton(
-                              child: Text(
-                                'Register',
-                                style: TextStyle(fontSize: 18.0),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                padding: EdgeInsets.all(10.0),
-                              ),
-                              onPressed: _submit,
-                            ),
-                          ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 2.0,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Text(
-                          'OR',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.6),
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 2.0,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            child: Text('Facebook'),
-                            onPressed: _signInWithFacebook,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              primary: Color(0xFF334D92),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Expanded(
-                          child: ElevatedButton(
-                            child: Text('Google'),
-                            onPressed: _signInWithGoogle,
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                primary: Color(0xFFDB4437)),
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
-              ),
-            ]),
+                Form(
+                  key: _registerFormKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: kInputDecoration.copyWith(
+                          prefixIcon: Icon(Icons.email),
+                          labelText: 'Email',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.indigo),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        validator: validateEmail,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: kInputDecoration.copyWith(
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                            child: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          ),
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.indigo),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        validator: validatePassword,
+                        obscureText: _obscureText,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _isLoading
+                          ? CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.indigo),
+                            )
+                          : Container(
+                              width: double.infinity,
+                              height: 42.0,
+                              child: ElevatedButton(
+                                child: Text(
+                                  'Register',
+                                  style: TextStyle(fontSize: 18.0, letterSpacing: 1.2),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  padding: EdgeInsets.all(10.0),
+                                ),
+                                onPressed: _submit,
+                              ),
+                            ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              thickness: 2.0,
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Text(
+                            'OR',
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.6),
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Expanded(
+                            child: Divider(
+                              thickness: 2.0,
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              child: Text('Facebook'),
+                              onPressed: _signInWithFacebook,
+                              style: ElevatedButton.styleFrom(
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                primary: Color(0xFF334D92),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Expanded(
+                            child: ElevatedButton(
+                              child: Text('Google'),
+                              onPressed: _signInWithGoogle,
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  primary: Color(0xFFDB4437)),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ]),
+        ),
       ),
     );
   }
