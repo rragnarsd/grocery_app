@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/widgets/toggle_button.dart';
+
+import 'landing_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: ToggleButton(),
+      body: LandingScreen(),
     );
   }
 }

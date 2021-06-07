@@ -8,6 +8,8 @@ import 'package:grocery_app/screens/feeds.dart';
 import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/wishlist.dart';
 import 'package:grocery_app/widgets/auth/auth_state.dart';
+import 'package:grocery_app/widgets/auth/login_form.dart';
+import 'package:grocery_app/widgets/auth/register_form.dart';
 import 'package:grocery_app/widgets/categories_feeds.dart';
 import 'package:grocery_app/screens/product_details.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
           '/CategoriesFeedsScreen': (context) => CategoriesFeedsScreen(),
           '/AuthScreen': (context) => AuthScreen(),
           '/AuthState': (context) => AuthState(),
+          '/SignInForm': (context) => SignInForm(),
+          '/RegisterForm': (context) => RegisterForm(),
         },
       ),
     );
