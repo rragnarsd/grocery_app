@@ -10,7 +10,6 @@ class CartWishEmpty extends StatelessWidget {
 
   CartWishEmpty({this.title, this.subTitle, this.screen, this.btnText});
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,10 +21,7 @@ class CartWishEmpty extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Text(
-         title,
-          style: kTextStyleLarge
-        ),
+        Text(title, style: kTextStyleLarge),
         SizedBox(
           height: 10,
         ),
@@ -40,6 +36,7 @@ class CartWishEmpty extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              elevation: 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -49,10 +46,7 @@ class CartWishEmpty extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-               btnText,
-                style: kTextStyleSmall
-              ),
+              child: Text(btnText, style: kTextStyleSmall),
             ),
           ),
         )

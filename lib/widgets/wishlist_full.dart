@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/fav_attr.dart';
+import 'package:grocery_app/models/fav_model.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class WishListFull extends StatefulWidget {
 class _WishListFullState extends State<WishListFull> {
   @override
   Widget build(BuildContext context) {
-    final favAttr = Provider.of<FavAttr>(context);
+    final favAttr = Provider.of<FavModel>(context);
     final favProvider = Provider.of<FavProvider>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),

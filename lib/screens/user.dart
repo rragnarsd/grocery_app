@@ -137,6 +137,26 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
+                      child: Text('Contact', style: kTextStyleMedium),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    Material(
+                      child: InkWell(
+                        splashColor: Theme.of(context).splashColor,
+                        child: ListTile(
+                          title: Text('Contact'),
+                          trailing: Icon(Icons.chevron_right),
+                          leading: Icon(Icons.message_outlined),
+                          onTap: () =>
+                              Navigator.of(context).pushNamed('/ContactScreen'),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
                       child: Text('Information', style: kTextStyleMedium),
                     ),
                     Divider(

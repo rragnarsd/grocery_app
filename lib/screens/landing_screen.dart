@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/widgets/auth/register_form.dart';
+
+import '../constants.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -14,10 +17,10 @@ class _LandingScreenState extends State<LandingScreen> {
         children: [
           Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/brooke-lark.jpg'),
-              fit: BoxFit.cover,
-            ),
+              image: DecorationImage(
+                image: AssetImage('assets/images/brooke-lark.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Container(
@@ -25,12 +28,10 @@ class _LandingScreenState extends State<LandingScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               gradient: LinearGradient(
-                begin: FractionalOffset.topLeft,
-                end: FractionalOffset.bottomRight,
-                colors: [
-                  Colors.white.withOpacity(0.0),
-                  Colors.grey.shade200
-                ],
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                /*colors: [Colors.indigo.withOpacity(0.4), Colors.indigoAccent.shade200],*/
+                colors: [Colors.white.withOpacity(0.0), Colors.grey.shade200],
                 stops: [0.0, 1.0],
               ),
             ),
@@ -40,16 +41,16 @@ class _LandingScreenState extends State<LandingScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                      /*Container(
-                child: Image.asset('assets/images/logo.png'),
-              ),*/
+                Container(
+                  child: Image.asset('assets/images/farmerslogo.png'),
+                ),
                 Container(
                   width: double.infinity,
                   height: 42.0,
                   child: ElevatedButton(
                       child: Text(
                         'Sign in',
-                        style: TextStyle(fontSize: 18.0, color: Colors.indigo, letterSpacing: 1.2),
+                        style: kTextStyleSmall.copyWith(letterSpacing: 1.2, color: Colors.indigo),
                       ),
                       style: ElevatedButton.styleFrom(
                         elevation: 3,
@@ -61,7 +62,6 @@ class _LandingScreenState extends State<LandingScreen> {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/SignInForm');
-                        print('hello');
                       }),
                 ),
                 SizedBox(height: 20.0),
@@ -71,7 +71,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   child: ElevatedButton(
                       child: Text(
                         'Register',
-                        style: TextStyle(fontSize: 18.0, letterSpacing: 1.2),
+                        style: kTextStyleSmall.copyWith(letterSpacing: 1.2),
                       ),
                       style: ElevatedButton.styleFrom(
                         elevation: 3,

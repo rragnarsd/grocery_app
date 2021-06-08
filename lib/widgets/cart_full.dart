@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/cart_attr.dart';
+import 'package:grocery_app/models/cart_model.dart';
 import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/screens/product_details.dart';
 import 'package:grocery_app/widgets/alert_dialogs.dart';
@@ -19,7 +19,7 @@ class CartFull extends StatefulWidget {
 class _CartFullState extends State<CartFull> {
   @override
   Widget build(BuildContext context) {
-    final cartAttr = Provider.of<CartAttr>(context);
+    final cartAttr = Provider.of<CartModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     double total = cartAttr.price * cartAttr.qty;
     return SafeArea(

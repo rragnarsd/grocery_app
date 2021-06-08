@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 Future<bool> showAlertDialog(
@@ -6,6 +5,7 @@ Future<bool> showAlertDialog(
   @required String title,
   @required String content,
   String cancelActionText,
+  String color,
   @required String defaultActionText,
 }) {
   return showDialog(

@@ -4,6 +4,7 @@ import 'package:grocery_app/provider/cart_provider.dart';
 import 'package:grocery_app/provider/fav_provider.dart';
 import 'package:grocery_app/provider/products.dart';
 import 'package:grocery_app/screens/cart.dart';
+import 'package:grocery_app/screens/contact_screen.dart';
 import 'package:grocery_app/screens/feeds.dart';
 import 'package:grocery_app/screens/auth_screen.dart';
 import 'package:grocery_app/screens/wishlist.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           '/AuthState': (context) => AuthState(),
           '/SignInForm': (context) => SignInForm(),
           '/RegisterForm': (context) => RegisterForm(),
+          '/ContactScreen': (context) => ContactScreen(),
         },
       ),
     );

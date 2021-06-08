@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/fav_attr.dart';
+import 'package:grocery_app/models/fav_model.dart';
 
 class FavProvider with ChangeNotifier {
-  Map<String, FavAttr> _favItems = {};
+  Map<String, FavModel> _favItems = {};
 
-  Map<String, FavAttr> get getFavItems {
+  Map<String, FavModel> get getFavItems {
     return _favItems;
   }
 
@@ -17,7 +17,7 @@ class FavProvider with ChangeNotifier {
     } else {
       _favItems.putIfAbsent(
         productId,
-        () => FavAttr(
+        () => FavModel(
             id: DateTime.now().toString(),
             name: name,
             price: price,

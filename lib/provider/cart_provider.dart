@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/models/cart_attr.dart';
+import 'package:grocery_app/models/cart_model.dart';
 
 class CartProvider with ChangeNotifier {
-  Map<String, CartAttr> _cartItems = {};
+  Map<String, CartModel> _cartItems = {};
 
-  Map<String, CartAttr> get getCartItems {
+  Map<String, CartModel> get getCartItems {
     return _cartItems;
   }
 
@@ -24,7 +24,7 @@ class CartProvider with ChangeNotifier {
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
-          (existingCartItem) => CartAttr(
+          (existingCartItem) => CartModel(
               id: existingCartItem.id,
               name: existingCartItem.name,
               price: existingCartItem.price,
@@ -33,7 +33,7 @@ class CartProvider with ChangeNotifier {
     } else {
       _cartItems.putIfAbsent(
           productId,
-          () => CartAttr(
+          () => CartModel(
               id: DateTime.now().toString(),
               name: name,
               price: price,
@@ -49,7 +49,7 @@ class CartProvider with ChangeNotifier {
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
-          (existingCartItem) => CartAttr(
+          (existingCartItem) => CartModel(
               id: existingCartItem.id,
               name: existingCartItem.name,
               price: existingCartItem.price,
