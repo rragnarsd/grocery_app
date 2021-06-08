@@ -6,15 +6,17 @@
 
 ## Features
 - Authentication
-  - Login with email and password
-  - Login with Facebook
-  - Login with Gmail
+  - Login/Logout/Register with email and password
+  - Login/Logout/Register with Facebook
+  - Login/Logout/Register with Gmail
 - Custom App Launcher. <em>(Not ready)</em>
 - Routing
 - State Management with Provider
 
 ## Design
-- The images are from www.unsplash.com.
+- The font family is Lato
+- The main color is Indigo from Material Design
+- The images are from www.unsplash.com
 - I made the logo on https://www.freelogodesign.org
 
 ## Packages
