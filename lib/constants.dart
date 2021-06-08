@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 const kTextStyleXSmall = TextStyle(
   fontSize: 16.0,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
 );
 
 const kTextStyleSmall = TextStyle(
   fontSize: 18.0,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
 );
 
 const kTextStyleMedium = TextStyle(
   fontSize: 20.0,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
 );
 
 const kTextStyleLarge = TextStyle(
   fontSize: 24.0,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
 );
 
 const kBoxDecorationAll = BoxDecoration(

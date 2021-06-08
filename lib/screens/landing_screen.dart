@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/widgets/auth/register_form.dart';
-
 import '../constants.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -30,7 +28,6 @@ class _LandingScreenState extends State<LandingScreen> {
               gradient: LinearGradient(
                 begin: FractionalOffset.topCenter,
                 end: FractionalOffset.bottomCenter,
-                /*colors: [Colors.indigo.withOpacity(0.4), Colors.indigoAccent.shade200],*/
                 colors: [Colors.white.withOpacity(0.0), Colors.grey.shade200],
                 stops: [0.0, 1.0],
               ),

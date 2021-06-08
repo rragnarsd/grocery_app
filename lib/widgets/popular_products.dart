@@ -80,7 +80,7 @@ class PopularProducts extends StatelessWidget {
                       Text(
                         productProvider.name,
                         maxLines: 1,
-                        style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.w700)
+                        style: kTextStyleXSmall
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -36,7 +36,15 @@ class MyApp extends StatelessWidget {
         title: 'Farmers Market',
         theme: ThemeData(
             primarySwatch: Colors.indigo,
-            visualDensity: VisualDensity.adaptivePlatformDensity),
+           /* splashColor: Colors.indigoAccent.shade200,*/
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            fontFamily: 'Lato',
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.indigoAccent.withOpacity(.6),
+            cursorColor: Colors.indigoAccent.withOpacity(.6),
+            selectionHandleColor: Colors.indigoAccent.withOpacity(1),
+          )
+        ),
         initialRoute: '/AuthState',
         routes: {
           '/BottomBarScreen': (context) => BottomBarScreen(),

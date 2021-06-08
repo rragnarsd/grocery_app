@@ -80,7 +80,8 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
                                 Text(_auth.currentUser.email == null
                                     ? 'Guest'
-                                    : _auth.currentUser.email),
+                                    : _auth.currentUser.email,
+                                ),
                               ],
                             ),
                           ),
@@ -104,7 +105,7 @@ class _UserScreenState extends State<UserScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text('User Bag', style: kTextStyleMedium),
+                      child: Text('User Bag', style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w600)),
                     ),
                     Divider(
                       thickness: 1,
@@ -116,7 +117,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: ListTile(
                           title: Text('Wishlist'),
                           trailing: Icon(Icons.chevron_right),
-                          leading: Icon(Icons.favorite),
+                          leading: Icon(Icons.favorite_outline, color: Colors.indigo,),
                           onTap: () => Navigator.of(context)
                               .pushNamed('/WishListScreen'),
                         ),
@@ -128,7 +129,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: ListTile(
                           title: Text('Cart'),
                           trailing: Icon(Icons.chevron_right),
-                          leading: Icon(Icons.shopping_cart),
+                          leading: Icon(Icons.shopping_cart_outlined, color: Colors.indigo,),
                           onTap: () =>
                               Navigator.of(context).pushNamed('/CartScreen'),
                         ),
@@ -136,7 +137,7 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text('Contact', style: kTextStyleMedium),
+                      child: Text('Contact', style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w600)),
                     ),
                     Divider(
                       thickness: 1,
@@ -148,7 +149,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: ListTile(
                           title: Text('Contact Us'),
                           trailing: Icon(Icons.chevron_right),
-                          leading: Icon(Icons.message_outlined),
+                          leading: Icon(Icons.message_outlined, color: Colors.indigo,),
                           onTap: () =>
                               Navigator.of(context).pushNamed('/ContactScreen'),
                         ),
@@ -156,7 +157,7 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text('Information', style: kTextStyleMedium),
+                      child: Text('Information', style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w600)),
                     ),
                     Divider(
                       thickness: 1,
@@ -175,7 +176,7 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text('Settings', style: kTextStyleMedium),
+                      child: Text('Settings', style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w600)),
                     ),
                     Divider(
                       thickness: 1,
@@ -187,7 +188,7 @@ class _UserScreenState extends State<UserScreen> {
                         child: ListTile(
                           title: Text('Sign out'),
                           subtitle: Text(''),
-                          leading: Icon(Icons.logout),
+                          leading: Icon(Icons.logout, color: Colors.indigo,),
                           onTap: () async {
                             final didRequestSignOut = await showAlertDialog(
                               context,
@@ -221,16 +222,16 @@ class _UserScreenState extends State<UserScreen> {
 class UserListTile extends StatelessWidget {
   final String title;
   final String subTitle;
-  int index;
+  final int index;
   final Function function;
 
   UserListTile({this.title, this.subTitle, this.index, this.function});
 
   List<IconData> _userTileIcons = [
-    Icons.email,
-    Icons.person,
-    Icons.watch_later,
-    Icons.exit_to_app
+    Icons.email_outlined,
+    Icons.person_outline,
+    /*Icons.watch_later,*/
+    Icons.exit_to_app_outlined
   ];
 
   @override
@@ -241,7 +242,7 @@ class UserListTile extends StatelessWidget {
         child: ListTile(
           title: Text(title),
           subtitle: Text(subTitle),
-          leading: Icon(_userTileIcons[index]),
+          leading: Icon(_userTileIcons[index], color: Colors.indigo,),
           onTap: function,
         ),
       ),

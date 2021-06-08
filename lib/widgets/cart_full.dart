@@ -85,7 +85,7 @@ class _CartFullState extends State<CartFull> {
                       ),
                       Row(
                         children: [
-                          Text('Price:'),
+                          Text('Price:', style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.normal),),
                           SizedBox(
                             width: 5,
                           ),
@@ -97,7 +97,7 @@ class _CartFullState extends State<CartFull> {
                       ),
                       Row(
                         children: [
-                          Text('Total:'),
+                          Text('Total:', style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.normal)),
                           SizedBox(
                             width: 5,
                           ),

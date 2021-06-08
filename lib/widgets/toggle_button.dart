@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:toggle_bar/toggle_bar.dart';
 
 import 'auth/login_form.dart';
-import 'auth/register_form.dart';
+import 'auth/register_form.dart';*/
 
+/*
 class ToggleButton extends StatefulWidget {
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
@@ -57,4 +58,5 @@ class _ToggleButtonState extends State<ToggleButton> {
 }
 
 
+*/
 

@@ -50,7 +50,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                     Text(
                       productProvider.name,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: kTextStyleSmall,
                     ),
                     SizedBox(
                       height: 10.0,
@@ -58,7 +58,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                     Text(
                       '\$ ${productProvider.price.toString()}',
                       overflow: TextOverflow.ellipsis,
-                      style: kTextStyleXSmall.copyWith(fontWeight: FontWeight.w700)
+                      style: kTextStyleXSmall,
                     ),
                     SizedBox(
                       height: 5.0,

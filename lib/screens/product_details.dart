@@ -86,7 +86,7 @@ class ProductBody extends StatelessWidget {
                     ),
                     Text(
                       '\$ ${prodAttr.price.toStringAsFixed(2)}',
-                      style: kTextStyleMedium
+                      style: kTextStyleMedium.copyWith(color: Colors.indigo)
                     ),
                   ],
                 ),
@@ -106,7 +106,7 @@ class ProductBody extends StatelessWidget {
                     ),
                     Text(
                       'Description',
-                      style: kTextStyleMedium.copyWith(fontWeight: FontWeight.w400)
+                      style: kTextStyleMedium,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -152,7 +152,7 @@ class ProductBody extends StatelessWidget {
                 Container(
                   color: Colors.grey.shade300,
                   width: double.infinity,
-                  height: 230,
+                  height: 240,
                   child: ListView.builder(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,

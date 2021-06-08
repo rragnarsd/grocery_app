@@ -51,9 +51,7 @@ class _WishListFullState extends State<WishListFull> {
                           children: [
                             Text(
                               favAttr.name,
-                              style: kTextStyleSmall.copyWith(
-                                  fontSize: 18.0, fontWeight: FontWeight.w700),
-                            ),
+                              style: kTextStyleSmall.copyWith(fontWeight: FontWeight.normal)),
                             SizedBox(
                               height: 10.0,
                             ),

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery_app/widgets/alert_dialogs.dart';
+import 'package:grocery_app/widgets/social_btn.dart';
 
 import '../../constants.dart';
+import '../auth_btn.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -133,9 +135,8 @@ class _SignInFormState extends State<SignInForm> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
               height: 150,
             ),
@@ -144,9 +145,7 @@ class _SignInFormState extends State<SignInForm> {
               children: [
                 Text(
                   'Welcome back!',
-                  style: kTextStyleLarge.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: kTextStyleLarge,
                 ),
                 SizedBox(
                   height: 10,
@@ -215,23 +214,9 @@ class _SignInFormState extends State<SignInForm> {
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.indigo),
                         )
-                      : Container(
-                          width: double.infinity,
-                          height: 42.0,
-                          child: ElevatedButton(
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(fontSize: 18.0, letterSpacing: 1.2),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              padding: EdgeInsets.all(10.0),
-                            ),
-                            onPressed: _submit,
-                          ),
+                      : AuthBtn(
+                          btnText: 'Sign in',
+                          function: _submit,
                         ),
                   SizedBox(
                     height: 20.0,
@@ -270,34 +255,19 @@ class _SignInFormState extends State<SignInForm> {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          child: Text('Facebook'),
-                          onPressed: _signInWithFacebook,
-                          style: ElevatedButton.styleFrom(
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            primary: Color(0xFF334D92),
-                          ),
-                        ),
+                      SocialBtn(
+                        btnText: 'Facebook',
+                        function: _signInWithFacebook,
+                        color: 0xFF334D92,
                       ),
                       SizedBox(
                         width: 20.0,
                       ),
-                      Expanded(
-                        child: ElevatedButton(
-                          child: Text('Google'),
-                          onPressed: _signInWithGoogle,
-                          style: ElevatedButton.styleFrom(
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              primary: Color(0xFFDB4437)),
-                        ),
-                      ),
+                      SocialBtn(
+                        btnText: 'Google',
+                        function: _signInWithGoogle,
+                        color: 0xFFDB4437,
+                      )
                     ],
                   )
                 ],

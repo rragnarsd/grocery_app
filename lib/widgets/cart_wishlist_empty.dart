@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/widgets/product_btn.dart';
 
 import '../constants.dart';
 
@@ -21,7 +22,7 @@ class CartWishEmpty extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Text(title, style: kTextStyleLarge),
+        Text(title, style: kTextStyleLarge.copyWith(fontWeight: FontWeight.w700)),
         SizedBox(
           height: 10,
         ),
@@ -34,21 +35,7 @@ class CartWishEmpty extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-            onPressed: () {
-              Navigator.of(context).pushNamed(screen);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(btnText, style: kTextStyleSmall),
-            ),
-          ),
+          child: ProductBtn(btnText: btnText, screen: screen,),
         )
       ],
     );

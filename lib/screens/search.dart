@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
-    final productsList = productsData.products;
+   /* final productsList = productsData.products;*/
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
