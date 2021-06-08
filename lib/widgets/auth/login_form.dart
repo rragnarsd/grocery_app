@@ -60,7 +60,8 @@ class _SignInFormState extends State<SignInForm> {
       showAlertDialog(context,
           title: 'Signed in failed',
           content: error.message,
-          defaultActionText: 'Ok');
+          defaultActionText: 'Ok',
+        function: () => Navigator.of(context).pop(false),);
     } finally {
       setState(() {
         _isLoading = false;

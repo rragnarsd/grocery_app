@@ -70,7 +70,8 @@ class _RegisterFormState extends State<RegisterForm> {
       showAlertDialog(context,
           title: 'Register failed',
           content: error.message,
-          defaultActionText: 'Ok');
+          defaultActionText: 'Ok',
+      function: () => Navigator.of(context).pop(false),);
     } finally {
       setState(() {
         _isLoading = false;

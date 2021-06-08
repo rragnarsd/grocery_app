@@ -63,7 +63,7 @@ class _ContactScreenState extends State<ContactScreen> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
-                  height: 350,
+                 /* height: 350,*/
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
