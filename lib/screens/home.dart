@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     final popularItems = productsData.popularProducts;
-    print('popularItems length ${popularItems.length}');
 
     return Scaffold(
       appBar: AppBar(

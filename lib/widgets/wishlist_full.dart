@@ -74,6 +74,7 @@ class _WishListFullState extends State<WishListFull> {
                               content: 'This item will be removed!',
                               cancelActionText: 'Cancel',
                               defaultActionText: 'Continue',
+                                function: () => Navigator.of(context).pop(true)
                             );
                             if (continueRequest == true) {
                               favProvider.removeItemFromFav(widget.productId);

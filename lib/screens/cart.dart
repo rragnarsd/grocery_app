@@ -14,7 +14,13 @@ class CartScreen extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
 
     return cartProvider.getCartItems.isEmpty
-        ? Scaffold(body: CartWishEmpty(title: 'Your Cart is Empty', subTitle: 'Would you like to buy something?', screen: '/FeedsScreen', btnText: 'Shop Now',))
+        ? Scaffold(
+            body: CartWishEmpty(
+            title: 'Your Cart is Empty',
+            subTitle: 'Would you like to buy something?',
+            screen: '/FeedsScreen',
+            btnText: 'Shop Now',
+          ))
         : Scaffold(
             appBar: AppBar(
               title: Text('Cart (${cartProvider.getCartItems.length})'),
@@ -22,13 +28,12 @@ class CartScreen extends StatelessWidget {
                 IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () async {
-                      final continueRequest = await showAlertDialog(
-                        context,
-                        title: 'Are you sure?',
-                        content: 'These items will be removed!',
-                        defaultActionText: 'Continue',
-                        cancelActionText: 'Cancel',
-                      );
+                      final continueRequest = await showAlertDialog(context,
+                          title: 'Are you sure?',
+                          content: 'These items will be removed!',
+                          defaultActionText: 'Continue',
+                          cancelActionText: 'Cancel',
+                          function: () => Navigator.of(context).pop(true));
                       if (continueRequest == true) {
                         cartProvider.clearCart();
                       }
@@ -64,17 +69,15 @@ class CartScreen extends StatelessWidget {
                         Container(
                           child: Row(
                             children: [
-                              Text(
-                                'Total:',
-                                style: kTextStyleSmall.copyWith(color: Colors.indigo)
-                              ),
+                              Text('Total:',
+                                  style: kTextStyleSmall.copyWith(
+                                      color: Colors.indigo)),
                               SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
-                                style: kTextStyleSmall
-                              )
+                                  '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
+                                  style: kTextStyleSmall)
                             ],
                           ),
                         ),
@@ -82,10 +85,7 @@ class CartScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.37,
                           child: ElevatedButton(
                             onPressed: () {},
-                            child: Text(
-                              'Check Out',
-                                style: kTextStyleXSmall
-                            ),
+                            child: Text('Check Out', style: kTextStyleXSmall),
                           ),
                         ),
                       ],

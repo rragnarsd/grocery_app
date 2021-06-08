@@ -6,6 +6,7 @@ Future<bool> showAlertDialog(
   @required String content,
   String cancelActionText,
   String color,
+  Function function,
   @required String defaultActionText,
 }) {
   return showDialog(
@@ -21,7 +22,8 @@ Future<bool> showAlertDialog(
             onPressed: () => Navigator.of(context).pop(false),
           ),
         OutlinedButton(
-          onPressed: () => Navigator.of(context).pop(true),
+          onPressed: function,
+          /*onPressed: () => Navigator.of(context).pop(true),*/
           child: Text(defaultActionText),
         )
       ],

@@ -28,7 +28,6 @@ class _UserScreenState extends State<UserScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,9 +78,9 @@ class _UserScreenState extends State<UserScreen> {
                                     ),
                                   ),
                                 ),
-                                Text(
-                                 _auth.currentUser.email == null ? 'Guest' : _auth.currentUser.email
-                                ),
+                                Text(_auth.currentUser.email == null
+                                    ? 'Guest'
+                                    : _auth.currentUser.email),
                               ],
                             ),
                           ),
@@ -147,7 +146,7 @@ class _UserScreenState extends State<UserScreen> {
                       child: InkWell(
                         splashColor: Theme.of(context).splashColor,
                         child: ListTile(
-                          title: Text('Contact'),
+                          title: Text('Contact Us'),
                           trailing: Icon(Icons.chevron_right),
                           leading: Icon(Icons.message_outlined),
                           onTap: () =>
@@ -164,10 +163,15 @@ class _UserScreenState extends State<UserScreen> {
                       color: Colors.grey,
                     ),
                     UserListTile(
-                      title: 'Name', subTitle: '${_auth.currentUser.displayName == null ? 'Guest' : _auth.currentUser.displayName}', index: 1,
+                      title: 'Name',
+                      subTitle:
+                          '${_auth.currentUser.displayName == null ? 'Guest' : _auth.currentUser.displayName}',
+                      index: 1,
                     ),
                     UserListTile(
-                        title: 'Email', subTitle: '${ _auth.currentUser.email}', index: 0,
+                      title: 'Email',
+                      subTitle: '${_auth.currentUser.email}',
+                      index: 0,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -185,18 +189,20 @@ class _UserScreenState extends State<UserScreen> {
                           subtitle: Text(''),
                           leading: Icon(Icons.logout),
                           onTap: () async {
-                            final didRequestSignOut = await
-                            showAlertDialog(context,
-                                title: 'Logout',
-                                content:
-                                    'Are you sure that you want to logout?',
-                                defaultActionText: 'Logout',
-                                cancelActionText: 'Cancel'); if (didRequestSignOut == true) {
-                                  final googleSignIn = GoogleSignIn();
-                                  await googleSignIn.signOut();
-                                  final facebookLogin = FacebookLogin();
-                                  await facebookLogin.logOut();
-                                  await FirebaseAuth.instance.signOut();
+                            final didRequestSignOut = await showAlertDialog(
+                              context,
+                              title: 'Logout',
+                              content: 'Are you sure that you want to logout?',
+                              defaultActionText: 'Logout',
+                              cancelActionText: 'Cancel',
+                              function: () => Navigator.of(context).pop(true),
+                            );
+                            if (didRequestSignOut == true) {
+                              final googleSignIn = GoogleSignIn();
+                              await googleSignIn.signOut();
+                              final facebookLogin = FacebookLogin();
+                              await facebookLogin.logOut();
+                              await FirebaseAuth.instance.signOut();
                             }
                           },
                         ),

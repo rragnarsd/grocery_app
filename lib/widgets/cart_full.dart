@@ -73,6 +73,7 @@ class _CartFullState extends State<CartFull> {
                                 content: 'This item will be removed!',
                                 defaultActionText: 'Continue',
                                 cancelActionText: 'Cancel',
+                                function: () => Navigator.of(context).pop(true)
                               );
                               if (continueRequest == true) {
                                 cartProvider
