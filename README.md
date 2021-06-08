@@ -9,7 +9,7 @@
   - Login/Logout/Register with email and password
   - Login/Logout/Register with Facebook
   - Login/Logout/Register with Gmail
-- Custom App Launcher. <em>(Not ready)</em>
+- Custom App Launcher
 - Routing
 - State Management with Provider
 
@@ -27,6 +27,7 @@
 - Badges - https://pub.dev/packages/badges
 - Flutter_login_facebook - https://pub.dev/packages/flutter_login_facebook
 - Google_sign_in - https://pub.dev/packages/google_sign_in
+- Flutter_launcher_icons - https://pub.dev/packages/flutter_launcher_icons
 
 ## Live version
 
